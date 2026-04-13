@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "rapport": "node uu-tester.js",
+    "monkey": "node monkey-tester.js",
     "arkiv": "node generer-arkiv.js"
   },
   "dependencies": {

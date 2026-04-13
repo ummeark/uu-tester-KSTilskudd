@@ -29,16 +29,25 @@ echo "[$DATO $(date +%H:%M:%S)] Node: $(node --version 2>&1)" >> "$LOG_FIL"
 echo "[$DATO $(date +%H:%M:%S)] Kjører npm run rapport..." >> "$LOG_FIL"
 npm run rapport >> "$LOG_FIL" 2>&1
 
+# Kjør monkey-testing
+echo "[$DATO $(date +%H:%M:%S)] Kjører npm run monkey..." >> "$LOG_FIL"
+npm run monkey >> "$LOG_FIL" 2>&1
+
 # Generer arkiv
 echo "[$DATO $(date +%H:%M:%S)] Kjører npm run arkiv..." >> "$LOG_FIL"
 npm run arkiv >> "$LOG_FIL" 2>&1
 
-# Kopier siste rapport til docs/
+# Kopier siste rapporter til docs/
 if [ -d "$REPO_DIR/rapporter/$DATO" ]; then
   cp "$REPO_DIR/rapporter/$DATO/rapport.html" "$REPO_DIR/docs/rapport.html"
+  cp "$REPO_DIR/rapporter/$DATO/monkey-rapport.html" "$REPO_DIR/docs/monkey-rapport.html" 2>/dev/null || true
   if [ -d "$REPO_DIR/rapporter/$DATO/skjermbilder" ]; then
     rm -rf "$REPO_DIR/docs/skjermbilder"
     cp -r "$REPO_DIR/rapporter/$DATO/skjermbilder" "$REPO_DIR/docs/skjermbilder"
+  fi
+  if [ -d "$REPO_DIR/rapporter/$DATO/skjermbilder-monkey" ]; then
+    rm -rf "$REPO_DIR/docs/skjermbilder-monkey"
+    cp -r "$REPO_DIR/rapporter/$DATO/skjermbilder-monkey" "$REPO_DIR/docs/skjermbilder-monkey"
   fi
 fi
 
