@@ -6,6 +6,7 @@
   "scripts": {
     "rapport": "node uu-tester.js",
     "monkey": "node monkey-tester.js",
+    "sikkerhet": "node sikkerhet-tester.js",
     "arkiv": "node generer-arkiv.js"
   },
   "dependencies": {

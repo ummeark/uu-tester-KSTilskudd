@@ -659,6 +659,7 @@ function genererRapport(url, dato, totalt, sider) {
     <div class="nav-knapper">
       <a href="rapport.html" class="knapp aktiv">UU-rapport</a>
       <a href="monkey-rapport.html" class="knapp sekundær">Monkey-test</a>
+      <a href="sikkerhet-rapport.html" class="knapp sekundær">Sikkerhetstest</a>
       <a href="arkiv.html" class="knapp sekundær">Tidligere rapporter</a>
     </div>
   </div>

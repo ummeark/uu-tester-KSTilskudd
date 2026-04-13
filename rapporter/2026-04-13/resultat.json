@@ -91,7 +91,7 @@
       "skjemafelt": [
         {
           "type": "search",
-          "id": ":mnx52fguft2",
+          "id": ":mnx5fkge94i",
           "navn": "search",
           "labelTekst": "Finn tilskuddsordning(er) ved å søke på navn, sted og type osv.",
           "påkrevd": false,
@@ -281,7 +281,7 @@
       "skjemafelt": [
         {
           "type": "search",
-          "id": ":mnx52h0vuq9",
+          "id": ":mnx5flumt66",
           "navn": "",
           "labelTekst": "Finn tilskuddsordning(er) ved å søke på navn, sted og type osv.",
           "påkrevd": false,

@@ -3,15 +3,15 @@
   "dato": "2026-04-13",
   "totalt": {
     "iterasjoner": 60,
-    "siderBesøkt": 6,
+    "siderBesøkt": 7,
     "jsErrors": 0,
     "konsollFeil": 0,
     "nettverksFeil": 0,
-    "kritiske": 2,
+    "kritiske": 1,
     "alvorlige": 0,
     "varighet": 32
   },
-  "score": 60,
+  "score": 80,
   "jsErrors": [],
   "konsollFeil": [],
   "nettverksFeil": [],
@@ -20,27 +20,19 @@
       "type": "feilside",
       "alvorlighet": "kritisk",
       "melding": "Feilside etter klikk: inneholder \"500\"",
-      "url": "https://tilskudd.fiks.test.ks.no/ordninger/553b5d8c-209e-410e-88c6-a6cb79d714dc",
-      "handling": "Klikket lenke: \"Skånsom Impulsiv Tiger AsForskning og innovasjon i bedrift\"",
-      "skjermdump": "skjermbilder-monkey/monkey-feilside-3.png",
-      "tid": "2026-04-13T11:58:49.955Z"
-    },
-    {
-      "type": "feilside",
-      "alvorlighet": "kritisk",
-      "melding": "Feilside etter klikk: inneholder \"500\"",
-      "url": "https://tilskudd.fiks.test.ks.no/ordninger/553b5d8c-209e-410e-88c6-a6cb79d714dc",
-      "handling": "Klikket lenke: \"Skånsom Impulsiv Tiger AsForskning og innovasjon i bedrift\"",
-      "skjermdump": "skjermbilder-monkey/monkey-feilside-5.png",
-      "tid": "2026-04-13T11:59:06.337Z"
+      "url": "https://tilskudd.fiks.test.ks.no/ordninger/cbc3a2eb-42bd-49db-b2e7-0f66e13a56a0",
+      "handling": "Klikket lenke: \"Punktlig Viktig Hund DaKommunalt næringsfond Kristiansund 20\"",
+      "skjermdump": "skjermbilder-monkey/monkey-feilside-2.png",
+      "tid": "2026-04-13T12:09:18.276Z"
     }
   ],
   "besøkte": [
     "https://tilskudd.fiks.test.ks.no/",
     "https://tilskudd.fiks.test.ks.no/ordninger?currentPage=1&pageSize=10",
-    "about:blank",
-    "https://tilskudd.fiks.test.ks.no/ordninger?currentPage=1&pageSize=10&searchString=%22-1%22",
-    "https://tilskudd.fiks.test.ks.no/ordninger?searchString=Test+bruker&currentPage=1&pageSize=10",
-    "https://tilskudd.fiks.test.ks.no/ordninger/7082abd8-4f23-43e9-adce-c4762b848b81"
+    "https://tilskudd.fiks.test.ks.no/ordninger/72ad6a5b-3819-446b-881d-eed1d5dd9ed6",
+    "https://login.test.idporten.no/authorize/selector",
+    "https://tilskudd.fiks.test.ks.no/ordninger/7082abd8-4f23-43e9-adce-c4762b848b81",
+    "https://tilskudd.fiks.test.ks.no/ordninger?searchString=wvs2kq9t93+w6qa4i069rb+5uemdverlyg+4d7tkn00ep8+qf7bieqvnnr+aid0nbydh0e+mkfump26dtk+sks0mcp08v&currentPage=1&pageSize=10",
+    "https://tilskudd.fiks.test.ks.no/ordninger?searchString=null+undefined+NaN&currentPage=1&pageSize=10"
   ]
 }
