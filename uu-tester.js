@@ -658,6 +658,47 @@ function genererRapport(url, dato, totalt, sider) {
     <div class="score-sirkel ${scoreKlasse}">${s}</div>
     <div class="score-tekst"><strong>UU-score</strong><p>Basert på WCAG-brudd, døde lenker og manglende labels på tvers av ${totalt.sider} sider. Klikk på skjermdumper for å forstørre.</p></div>
   </div>
+  <div class="seksjon" style="background:#f4ecdf;border-color:#e8dcc8;margin-bottom:1.5rem">
+    <div class="seksjon-tittel">Hva er UU-testing?</div>
+    <p style="font-size:.88rem;line-height:1.7;color:#374151;margin-bottom:1rem">
+      UU-testing (universell utforming) kontrollerer at applikasjonen er tilgjengelig for alle brukere,
+      inkludert de med nedsatt syn, motorikk eller kognisjon. Testen kjøres automatisk daglig mot
+      alle undersider og rapporterer brudd mot WCAG 2.1 A/AA-standarden.
+    </p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.8rem;font-size:.83rem">
+      <div>
+        <strong style="color:#0a1355;display:block;margin-bottom:.3rem">Hva testes</strong>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.25rem;color:#374151">
+          <li>♿ WCAG 2.1 A/AA-regler (axe-core)</li>
+          <li>🔘 Knapper med manglende label</li>
+          <li>🖼️ Bilder uten alt-tekst</li>
+          <li>📝 Skjemafelt uten label</li>
+          <li>🔗 Døde og ødelagte lenker</li>
+        </ul>
+      </div>
+      <div>
+        <strong style="color:#0a1355;display:block;margin-bottom:.3rem">Hva måles</strong>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.25rem;color:#374151">
+          <li>Antall WCAG-brudd per side</li>
+          <li>Alvorlighetsgrad (kritisk → lav)</li>
+          <li>HTTP-status på alle lenker</li>
+          <li>Sidestruktur og landmarks</li>
+          <li>Overskriftshierarki (H1–H6)</li>
+        </ul>
+      </div>
+      <div>
+        <strong style="color:#0a1355;display:block;margin-bottom:.3rem">Verktøy og metode</strong>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.25rem;color:#374151">
+          <li>axe-core (WCAG-motor)</li>
+          <li>Playwright (ekte nettleser)</li>
+          <li>Skjermdumper av feilende elementer</li>
+          <li>Opptil 20 undersider per kjøring</li>
+          <li>Kjøres daglig kl. 08:30</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <div class="kort-grid">
     <div class="kort ${totalt.sider > 0 ? 'ok' : 'advarsel'}"><div class="tall">${totalt.sider}</div><div class="etikett">Sider testet</div></div>
     <div class="kort ${totalt.wcagBrudd === 0 ? 'ok' : totalt.wcagBrudd < 5 ? 'advarsel' : 'kritisk'}"><div class="tall">${totalt.wcagBrudd}</div><div class="etikett">WCAG-brudd</div><div class="undertekst">${totalt.kritiske} kritiske · ${totalt.alvorlige} alvorlige</div></div>
