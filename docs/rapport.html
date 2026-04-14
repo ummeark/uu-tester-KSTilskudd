@@ -14,14 +14,17 @@
   header h1 { font-size: 1.4rem; font-weight: 700; }
   header p { opacity: 0.5; font-size: 0.82rem; margin-top: 0.3rem; }
 
-  .nav-knapper { display: flex; gap: .6rem; flex-wrap: wrap; align-items: flex-start; margin-bottom: 2rem; }
+  .rapport-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 2px solid #f4ecdf; flex-wrap: wrap; }
+  .rapport-header h1 { font-size: 1.5rem; font-weight: 700; color: #0a1355; letter-spacing: -.01em; }
+  .rapport-header .meta { font-size: .85rem; color: #6b7280; margin-top: .4rem; }
+  .nav-knapper { display: flex; gap: .6rem; flex-wrap: wrap; align-items: flex-start; }
   .knapp { display: inline-block; padding: .5rem 1.2rem; background: #0a1355; color: white; border-radius: 100px; font-size: .82rem; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background .15s; }
   .knapp:hover { background: #2b3285; }
   .knapp.aktiv { background: #07604f; pointer-events: none; }
   .knapp.sekundær { background: transparent; border: 1px solid #0a1355; color: #0a1355; }
   .knapp.sekundær:hover { background: #f4ecdf; }
 
-  .container { max-width: 980px; margin: 2.5rem auto; padding: 0 1.5rem; }
+  .container { max-width: 980px; margin: 2.5rem auto; padding: 0 3rem; }
 
   /* Total score-rad */
   .total-rad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
@@ -75,20 +78,24 @@
 <body>
 <header>
   <div class="header-inner">
-    <div class="header-merkevare">KS Tilskudd</div>
-    <h1>Testdashboard</h1>
-    <p>tirsdag 14. april 2026</p>
+    <div class="header-merkevare">KS Tilskudd · Testdashboard</div>
   </div>
 </header>
 <div class="container">
 
-  <div class="nav-knapper">
-    <a href="rapport.html" class="knapp aktiv">Forside</a>
-    <a href="uu-rapport.html" class="knapp sekundær">UU-rapport</a>
-    <a href="monkey-rapport.html" class="knapp sekundær">Monkey-test</a>
-    <a href="sikkerhet-rapport.html" class="knapp sekundær">Sikkerhetstest</a>
-    <a href="negativ-rapport.html" class="knapp sekundær">Negativ test</a>
-    <a href="arkiv.html" class="knapp sekundær">Arkiv</a>
+  <div class="rapport-header">
+    <div>
+      <h1>Testdashboard</h1>
+      <div class="meta">tilskudd.fiks.test.ks.no · tirsdag 14. april 2026</div>
+    </div>
+    <div class="nav-knapper">
+      <a href="rapport.html" class="knapp aktiv">Forside</a>
+      <a href="uu-rapport.html" class="knapp sekundær">UU-rapport</a>
+      <a href="monkey-rapport.html" class="knapp sekundær">Monkey-test</a>
+      <a href="sikkerhet-rapport.html" class="knapp sekundær">Sikkerhetstest</a>
+      <a href="negativ-rapport.html" class="knapp sekundær">Negativ test</a>
+      <a href="arkiv.html" class="knapp sekundær">Arkiv</a>
+    </div>
   </div>
 
   
