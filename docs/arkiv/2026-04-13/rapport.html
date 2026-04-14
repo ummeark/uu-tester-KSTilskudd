@@ -33,8 +33,12 @@
   .rapport-header .meta{font-size:.85rem;color:#6b7280;margin-top:.4rem}
   .rapport-header .meta a{color:#07604f;text-decoration:none}
   .rapport-header .meta a:hover{text-decoration:underline}
-  .arkiv-knapp{display:inline-block;padding:.5rem 1.2rem;background:#0a1355;color:white;border-radius:100px;font-size:.82rem;font-weight:500;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:background .15s}
-  .arkiv-knapp:hover{background:#2b3285}
+  .nav-knapper{display:flex;gap:.6rem;flex-wrap:wrap;align-items:flex-start}
+  .knapp{display:inline-block;padding:.5rem 1.2rem;background:#0a1355;color:white;border-radius:100px;font-size:.82rem;font-weight:500;text-decoration:none;white-space:nowrap;transition:background .15s}
+  .knapp:hover{background:#2b3285}
+  .knapp.aktiv{background:#07604f;pointer-events:none}
+  .knapp.sekundær{background:transparent;border:1px solid #0a1355;color:#0a1355}
+  .knapp.sekundær:hover{background:#f4ecdf}
 
   /* Score card */
   .score-kort{background:white;border:1px solid #f1f0ee;padding:1.8rem 2rem;margin-bottom:1.5rem;display:flex;align-items:center;gap:2rem;box-shadow:0 1px 4px rgba(10,19,85,.06)}
@@ -162,16 +166,63 @@
       <h1>Tilgjengelighetsrapport</h1>
       <div class="meta"><a href="https://tilskudd.fiks.test.ks.no/" target="_blank">https://tilskudd.fiks.test.ks.no/</a> · 2026-04-13 · 9 sider testet</div>
     </div>
-    <a href="arkiv.html" class="arkiv-knapp">Tidligere rapporter</a>
+    <div class="nav-knapper">
+      <a href="rapport.html" class="knapp aktiv">UU-rapport</a>
+      <a href="monkey-rapport.html" class="knapp sekundær">Monkey-test</a>
+      <a href="sikkerhet-rapport.html" class="knapp sekundær">Sikkerhetstest</a>
+      <a href="negativ-rapport.html" class="knapp sekundær">Negativ test</a>
+      <a href="arkiv.html" class="knapp sekundær">Tidligere rapporter</a>
+    </div>
   </div>
   <div class="score-kort">
-    <div class="score-sirkel middels">72</div>
+    <div class="score-sirkel middels">67</div>
     <div class="score-tekst"><strong>UU-score</strong><p>Basert på WCAG-brudd, døde lenker og manglende labels på tvers av 9 sider. Klikk på skjermdumper for å forstørre.</p></div>
   </div>
+  <div class="seksjon" style="background:#f4ecdf;border-color:#e8dcc8;margin-bottom:1.5rem">
+    <div class="seksjon-tittel">Hva er UU-testing?</div>
+    <p style="font-size:.88rem;line-height:1.7;color:#374151;margin-bottom:1rem">
+      UU-testing (universell utforming) kontrollerer at applikasjonen er tilgjengelig for alle brukere,
+      inkludert de med nedsatt syn, motorikk eller kognisjon. Testen kjøres automatisk daglig mot
+      alle undersider og rapporterer brudd mot WCAG 2.1 A/AA-standarden.
+    </p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.8rem;font-size:.83rem">
+      <div>
+        <strong style="color:#0a1355;display:block;margin-bottom:.3rem">Hva testes</strong>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.25rem;color:#374151">
+          <li>♿ WCAG 2.1 A/AA-regler (axe-core)</li>
+          <li>🔘 Knapper med manglende label</li>
+          <li>🖼️ Bilder uten alt-tekst</li>
+          <li>📝 Skjemafelt uten label</li>
+          <li>🔗 Døde og ødelagte lenker</li>
+        </ul>
+      </div>
+      <div>
+        <strong style="color:#0a1355;display:block;margin-bottom:.3rem">Hva måles</strong>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.25rem;color:#374151">
+          <li>Antall WCAG-brudd per side</li>
+          <li>Alvorlighetsgrad (kritisk → lav)</li>
+          <li>HTTP-status på alle lenker</li>
+          <li>Sidestruktur og landmarks</li>
+          <li>Overskriftshierarki (H1–H6)</li>
+        </ul>
+      </div>
+      <div>
+        <strong style="color:#0a1355;display:block;margin-bottom:.3rem">Verktøy og metode</strong>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:.25rem;color:#374151">
+          <li>axe-core (WCAG-motor)</li>
+          <li>Playwright (ekte nettleser)</li>
+          <li>Skjermdumper av feilende elementer</li>
+          <li>Opptil 20 undersider per kjøring</li>
+          <li>Kjøres daglig kl. 08:30</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <div class="kort-grid">
     <div class="kort ok"><div class="tall">9</div><div class="etikett">Sider testet</div></div>
     <div class="kort advarsel"><div class="tall">1</div><div class="etikett">WCAG-brudd</div><div class="undertekst">0 kritiske · 0 alvorlige</div></div>
-    <div class="kort kritisk"><div class="tall">5</div><div class="etikett">Døde lenker</div></div>
+    <div class="kort kritisk"><div class="tall">6</div><div class="etikett">Døde lenker</div></div>
     <div class="kort ok"><div class="tall">7</div><div class="etikett">Knapper testet</div><div class="undertekst">0 uten label</div></div>
     <div class="kort ok"><div class="tall">23</div><div class="etikett">Bilder testet</div><div class="undertekst">0 uten alt</div></div>
     <div class="kort ok"><div class="tall">2</div><div class="etikett">Skjemafelt</div><div class="undertekst">0 uten label</div></div>
@@ -242,7 +293,7 @@
           <table><thead><tr><th>Type</th><th>ID</th><th>Label</th><th>Status</th></tr></thead><tbody>
           <tr>
             <td><code>search</code></td>
-            <td><code>:mnwyxnlyz23</code></td>
+            <td><code>:mnx5xoqxtro</code></td>
             <td>Finn tilskuddsordning(er) ved å søke på navn, sted og type osv.</td>
             <td>✅</td>
           </tr></tbody></table>
@@ -343,7 +394,7 @@
           <table><thead><tr><th>Type</th><th>ID</th><th>Label</th><th>Status</th></tr></thead><tbody>
           <tr>
             <td><code>search</code></td>
-            <td><code>:mnwyxqpf5w7</code></td>
+            <td><code>:mnx5xq6q651</code></td>
             <td>Finn tilskuddsordning(er) ved å søke på navn, sted og type osv.</td>
             <td>✅</td>
           </tr></tbody></table>
@@ -856,7 +907,7 @@
         <div class="side-score-badges">
           
           
-          
+          <span class="badge dead">1 døde lenker</span>
         </div>
       </div>
 
@@ -868,6 +919,25 @@
 
       <!-- Døde lenker med skjermdump -->
       
+      <div class="wcag-seksjon">
+        <h3>🔗 Døde lenker (1)</h3>
+        
+          <div class="brudd-kort" style="border-left-color:#6c757d">
+            <div class="brudd-header">
+              <div><span class="badge dead">503</span> <span>Sikkerhet og personvern</span></div>
+            </div>
+            <code class="node-selector">https://www.norge.no/nb/personopplysninger-nar-du-logger-inn/61</code>
+            
+            <div class="skjermdump-gruppe">
+              <div class="skjermdump-wrapper">
+                <p class="skjermdump-label">🖥️ Siden med den døde lenken markert</p>
+                <a href="../2026-04-13/skjermbilder/s9-doede-lenker-side.png" target="_blank">
+                  <img src="../2026-04-13/skjermbilder/s9-doede-lenker-side.png" alt="Skjermdump som viser plasseringen av den døde lenken" class="skjermdump helside" loading="lazy">
+                </a>
+              </div>
+            </div>
+          </div>
+      </div>
 
       <!-- Artefakter -->
       <div class="artefakt-grid">
@@ -949,7 +1019,12 @@
         
         <div class="artefakt-kort">
           <h3>🔗 Lenker sjekket (16)</h3>
-          <p class="ok-tekst">✅ Ingen døde lenker</p>
+          <table><thead><tr><th>Status</th><th>Tekst</th><th>URL</th></tr></thead><tbody>
+            <tr>
+              <td><span class="badge dead">503</span></td>
+              <td>Sikkerhet og personvern</td>
+              <td style="font-size:0.75rem;word-break:break-all">https://www.norge.no/nb/personopplysninger-nar-du-logger-inn/61</td>
+            </tr></tbody></table>
         </div>
       </div>
     </div>

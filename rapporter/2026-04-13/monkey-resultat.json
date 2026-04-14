@@ -3,15 +3,15 @@
   "dato": "2026-04-13",
   "totalt": {
     "iterasjoner": 60,
-    "siderBesøkt": 10,
+    "siderBesøkt": 9,
     "jsErrors": 0,
     "konsollFeil": 0,
     "nettverksFeil": 0,
-    "kritiske": 1,
+    "kritiske": 2,
     "alvorlige": 0,
-    "varighet": 30
+    "varighet": 32
   },
-  "score": 80,
+  "score": 60,
   "jsErrors": [],
   "konsollFeil": [],
   "nettverksFeil": [],
@@ -22,20 +22,28 @@
       "melding": "Feilside etter klikk: inneholder \"500\"",
       "url": "https://tilskudd.fiks.test.ks.no/ordninger/553b5d8c-209e-410e-88c6-a6cb79d714dc",
       "handling": "Klikket lenke: \"Skånsom Impulsiv Tiger AsForskning og innovasjon i bedrift\"",
+      "skjermdump": "skjermbilder-monkey/monkey-feilside-1.png",
+      "tid": "2026-04-13T12:36:43.521Z"
+    },
+    {
+      "type": "feilside",
+      "alvorlighet": "kritisk",
+      "melding": "Feilside etter klikk: inneholder \"500\"",
+      "url": "https://tilskudd.fiks.test.ks.no/ordninger/553b5d8c-209e-410e-88c6-a6cb79d714dc",
+      "handling": "Klikket lenke: \"Skånsom Impulsiv Tiger AsForskning og innovasjon i bedrift\"",
       "skjermdump": "skjermbilder-monkey/monkey-feilside-2.png",
-      "tid": "2026-04-13T12:23:13.531Z"
+      "tid": "2026-04-13T12:36:46.408Z"
     }
   ],
   "besøkte": [
     "https://tilskudd.fiks.test.ks.no/",
     "https://tilskudd.fiks.test.ks.no/ordninger?currentPage=1&pageSize=10",
-    "https://tilskudd.fiks.test.ks.no/ordninger/7082abd8-4f23-43e9-adce-c4762b848b81",
-    "https://tilskudd.fiks.test.ks.no/soknad/opprett?tilskuddsordningId=7082abd8-4f23-43e9-adce-c4762b848b81",
-    "https://tilskudd.fiks.test.ks.no/ordninger?searchString=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&currentPage=1&pageSize=10",
-    "https://tilskudd.fiks.test.ks.no/ordninger?searchString=f3uf2eeoh4+gbz7nd5sqyd+tjwhwave0p+tvadvabgwln+qkabz73wque+yih634zfo5q+7o41wfgpgd+28g4jvz1nfq&currentPage=1&pageSize=10",
-    "https://tilskudd.fiks.test.ks.no/ordninger?searchString=%C3%A6%C3%B8%C3%A5+%C3%86%C3%98%C3%85&currentPage=1&pageSize=10",
-    "https://tilskudd.fiks.test.ks.no/ordninger?currentPage=1&pageSize=10&searchString=%3Cb%3Ebold%3C%2Fb%3E",
+    "https://tilskudd.fiks.test.ks.no/ordninger?currentPage=1&pageSize=10&searchString=%2299999999999999999999%22",
+    "https://tilskudd.fiks.test.ks.no/ordninger?searchString=Test+bruker&currentPage=1&pageSize=10",
     "https://tilskudd.fiks.test.ks.no/ordninger?searchString=%21%40%23%24%25%26*%28%29&currentPage=1&pageSize=10",
-    "https://tilskudd.fiks.test.ks.no/ordninger?searchString=%220%22&currentPage=1&pageSize=10"
+    "https://tilskudd.fiks.test.ks.no/ordninger?currentPage=1&pageSize=10&searchString=%3Cb%3Ebold%3C%2Fb%3E",
+    "https://tilskudd.fiks.test.ks.no/ordninger?currentPage=1&pageSize=10&searchString=%220%22",
+    "https://tilskudd.fiks.test.ks.no/ordninger/72ad6a5b-3819-446b-881d-eed1d5dd9ed6",
+    "https://login.test.idporten.no/authorize/selector"
   ]
 }
