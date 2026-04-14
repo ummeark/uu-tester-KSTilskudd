@@ -360,14 +360,17 @@ const dashboardHTML = `<!DOCTYPE html>
   body { font-family: system-ui, -apple-system, sans-serif; background: #faf6f0; color: #0f0e17; min-height: 100vh; }
 
   header { background: #0a1355; color: white; padding: 1.6rem 2.5rem; }
-  .header-inner { max-width: 980px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .header-inner { max-width: 980px; margin: 0 auto; }
   .header-merkevare { font-size: 0.72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; opacity: 0.45; margin-bottom: .4rem; }
   header h1 { font-size: 1.4rem; font-weight: 700; }
   header p { opacity: 0.5; font-size: 0.82rem; margin-top: 0.3rem; }
-  .header-nav { display: flex; gap: 0.5rem; flex-wrap: wrap; }
-  .header-nav a { display: inline-block; padding: .45rem 1.1rem; border: 1px solid rgba(255,255,255,.3); border-radius: 100px; color: rgba(255,255,255,.8); text-decoration: none; font-size: 0.82rem; transition: all .15s; white-space: nowrap; }
-  .header-nav a:hover { background: rgba(255,255,255,.1); color: white; border-color: rgba(255,255,255,.6); }
-  .header-nav a.aktiv { background: rgba(255,255,255,.15); color: white; border-color: rgba(255,255,255,.5); }
+
+  .nav-knapper { display: flex; gap: .6rem; flex-wrap: wrap; align-items: flex-start; margin-bottom: 2rem; }
+  .knapp { display: inline-block; padding: .5rem 1.2rem; background: #0a1355; color: white; border-radius: 100px; font-size: .82rem; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background .15s; }
+  .knapp:hover { background: #2b3285; }
+  .knapp.aktiv { background: #07604f; pointer-events: none; }
+  .knapp.sekundær { background: transparent; border: 1px solid #0a1355; color: #0a1355; }
+  .knapp.sekundær:hover { background: #f4ecdf; }
 
   .container { max-width: 980px; margin: 2.5rem auto; padding: 0 1.5rem; }
 
@@ -423,22 +426,21 @@ const dashboardHTML = `<!DOCTYPE html>
 <body>
 <header>
   <div class="header-inner">
-    <div>
-      <div class="header-merkevare">KS Tilskudd</div>
-      <h1>Testdashboard</h1>
-      <p>${new Date().toLocaleDateString('nb-NO', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
-    </div>
-    <nav class="header-nav">
-      <a href="rapport.html" class="aktiv">Forside</a>
-      <a href="uu-rapport.html">UU-rapport</a>
-      <a href="monkey-rapport.html">Monkey-test</a>
-      <a href="sikkerhet-rapport.html">Sikkerhetstest</a>
-      <a href="negativ-rapport.html">Negativ test</a>
-      <a href="arkiv.html">Arkiv</a>
-    </nav>
+    <div class="header-merkevare">KS Tilskudd</div>
+    <h1>Testdashboard</h1>
+    <p>${new Date().toLocaleDateString('nb-NO', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
   </div>
 </header>
 <div class="container">
+
+  <div class="nav-knapper">
+    <a href="rapport.html" class="knapp aktiv">Forside</a>
+    <a href="uu-rapport.html" class="knapp sekundær">UU-rapport</a>
+    <a href="monkey-rapport.html" class="knapp sekundær">Monkey-test</a>
+    <a href="sikkerhet-rapport.html" class="knapp sekundær">Sikkerhetstest</a>
+    <a href="negativ-rapport.html" class="knapp sekundær">Negativ test</a>
+    <a href="arkiv.html" class="knapp sekundær">Arkiv</a>
+  </div>
 
   ${(() => {
     const scores = [sisteUU, sisteMonkey, sisteSikk, sisteNegativ].filter(Boolean).map(d => d.score);
