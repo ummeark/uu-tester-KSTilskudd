@@ -9,6 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const START_URL = process.argv[2] || 'https://tilskudd.fiks.test.ks.no/';
 const MAX_SIDER = parseInt(process.argv[3]) || 20;
 const dato = new Date().toISOString().slice(0, 10);
+const tidspunkt = new Date().toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit' });
 const rapportDir = path.join(__dirname, 'rapporter', dato);
 const skjermDir = path.join(rapportDir, 'skjermbilder');
 fs.mkdirSync(skjermDir, { recursive: true });
@@ -338,7 +339,7 @@ const totalt = {
 fs.writeFileSync(path.join(rapportDir, 'resultat.json'), JSON.stringify({ url: START_URL, dato, totalt, sider: sideResultater.map(s => ({ ...s, wcag: { ...s.wcag, detaljer: s.wcag.detaljer.map(v => ({ ...v, bilder: v.bilder })) } })) }, null, 2));
 
 // Generer HTML
-fs.writeFileSync(path.join(rapportDir, 'rapport.html'), genererRapport(START_URL, dato, totalt, sideResultater));
+fs.writeFileSync(path.join(rapportDir, 'rapport.html'), genererRapport(START_URL, dato, tidspunkt, totalt, sideResultater));
 
 // Terminal
 console.log('\n' + '━'.repeat(60));
@@ -374,7 +375,7 @@ function impactFarge(impact) {
   return { critical: '#c53030', serious: '#9a3412', moderate: '#b8860b', minor: '#6b7280' }[impact] || '#6b7280';
 }
 
-function genererRapport(url, dato, totalt, sider) {
+function genererRapport(url, dato, tidspunkt, totalt, sider) {
   const s = scoreBeregn(totalt);
   const scoreKlasse = s >= 80 ? 'god' : s >= 50 ? 'middels' : 'dårlig';
 
@@ -529,7 +530,7 @@ function genererRapport(url, dato, totalt, sider) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>UU-rapport – ${dato}</title>
+<title>UU-rapport – ${dato} ${tidspunkt}</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:system-ui,-apple-system,sans-serif;background:#faf6f0;color:#0f0e17;display:flex;min-height:100vh}
@@ -646,7 +647,7 @@ function genererRapport(url, dato, totalt, sider) {
 <nav class="sidemeny">
   <div class="sidemeny-header">
     <div class="sidemeny-logo">KS Tilskudd · UU-tester</div>
-    <h1>Tilgjengelighetsrapport <span>${dato} · ${totalt.sider} sider</span></h1>
+    <h1>Tilgjengelighetsrapport <span>${dato} ${tidspunkt} · ${totalt.sider} sider</span></h1>
   </div>
   <ul>${sidenavigasjon}</ul>
 </nav>
@@ -654,7 +655,7 @@ function genererRapport(url, dato, totalt, sider) {
   <div class="rapport-header">
     <div>
       <h1>Tilgjengelighetsrapport</h1>
-      <div class="meta"><a href="${url}" target="_blank">${url}</a> · ${dato} · ${totalt.sider} sider testet</div>
+      <div class="meta"><a href="${url}" target="_blank">${url}</a> · ${dato} ${tidspunkt} · ${totalt.sider} sider testet</div>
     </div>
     <div class="nav-knapper">
       <a href="rapport.html" class="knapp aktiv">UU-rapport</a>
@@ -718,7 +719,7 @@ function genererRapport(url, dato, totalt, sider) {
     <div class="kort ${totalt.feltUtenLabel === 0 ? 'ok' : 'advarsel'}"><div class="tall">${totalt.skjemafelt}</div><div class="etikett">Skjemafelt</div><div class="undertekst">${totalt.feltUtenLabel} uten label</div></div>
   </div>
   ${sideDetaljer}
-  <footer>KS Tilskudd · UU-tester · axe-core + Playwright · ${dato}</footer>
+  <footer>KS Tilskudd · UU-tester · axe-core + Playwright · ${dato} ${tidspunkt}</footer>
 </div>
 </body>
 </html>`;
