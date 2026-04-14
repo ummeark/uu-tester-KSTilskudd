@@ -1,0 +1,74 @@
+{
+  "url": "https://tilskudd.fiks.test.ks.no/",
+  "dato": "2026-04-14",
+  "totalt": {
+    "iterasjoner": 60,
+    "siderBesøkt": 6,
+    "jsErrors": 3,
+    "konsollFeil": 0,
+    "nettverksFeil": 0,
+    "kritiske": 2,
+    "alvorlige": 1,
+    "varighet": 35
+  },
+  "score": 26,
+  "jsErrors": [
+    {
+      "melding": "Minified React error #419; visit https://react.dev/errors/419 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.",
+      "stack": "",
+      "url": "https://tilskudd.fiks.test.ks.no/ordninger/7082abd8-4f23-43e9-adce-c4762b848b81",
+      "tid": "2026-04-14T13:11:36.006Z"
+    },
+    {
+      "melding": "Minified React error #419; visit https://react.dev/errors/419 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.",
+      "stack": "",
+      "url": "https://tilskudd.fiks.test.ks.no/ordninger/7082abd8-4f23-43e9-adce-c4762b848b81",
+      "tid": "2026-04-14T13:11:39.913Z"
+    },
+    {
+      "melding": "Minified React error #419; visit https://react.dev/errors/419 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.",
+      "stack": "",
+      "url": "https://tilskudd.fiks.test.ks.no/ordninger/cbc3a2eb-42bd-49db-b2e7-0f66e13a56a0",
+      "tid": "2026-04-14T13:11:52.912Z"
+    }
+  ],
+  "konsollFeil": [],
+  "nettverksFeil": [],
+  "interaksjoner": [
+    {
+      "type": "feilside",
+      "alvorlighet": "kritisk",
+      "melding": "Feilside etter klikk: inneholder \"500\"",
+      "url": "https://tilskudd.fiks.test.ks.no/ordninger/cbc3a2eb-42bd-49db-b2e7-0f66e13a56a0",
+      "handling": "Klikket lenke: \"Punktlig Viktig Hund DaKommunalt næringsfond Kristiansund 20\"",
+      "skjermdump": "skjermbilder-monkey/monkey-feilside-5.png",
+      "tid": "2026-04-14T13:11:52.782Z"
+    },
+    {
+      "type": "feilside",
+      "alvorlighet": "kritisk",
+      "melding": "Feilside etter navigasjon: inneholder \"500\"",
+      "url": "https://tilskudd.fiks.test.ks.no/ordninger/cbc3a2eb-42bd-49db-b2e7-0f66e13a56a0",
+      "handling": "Gikk tilbake (browser back)",
+      "skjermdump": "skjermbilder-monkey/monkey-feilside-6.png",
+      "tid": "2026-04-14T13:11:53.369Z"
+    },
+    {
+      "type": "skjema-validering",
+      "alvorlighet": "alvorlig",
+      "melding": "500 tilfeldige bokstaver reflekteres ukontrollert i HTML",
+      "url": "https://tilskudd.fiks.test.ks.no/ordninger?searchString=aymwtdjfFVdTacARtGJSdCxOHpVpWDZetDNzxARpHwoIUhEIMqXFUxFRtfLldsZuJnEANvhXaqMbAJQZqdKAsXQPOUatgZMBsOwQJhGPYncQflKcpvVEvbOoatTCAMhuAgFWfqqZadpbrRXltiPrXftvtIxOaGweiApSavYIkJaTCejAbrMbsSbriUcOKkPadPfAGCGsIaxKNghKwexpnWXCNwQAyZbkLcmmAIOlFYosERaFNcmckEzMWgLAcEDTnqhPhSrBPdbaitqqabNDurupNcAjtwSpAQqevxCcFZHBeKgpPcdHFVpWxPbsiYowxOBmkAsRDMKUKrxgLGSMYsPZTUmmFsWMDgsLlDzoukWntGKkdBiOnSrMuvKsdbtNyucwmlrHQfDhpWDtMsqYvIpSRDIzYNQHiXWGsulbLKKiALWtNOmBzNVLqpmSVimxtbUPMTBDaEiXHroavwMOfEedImyBgVQMwNxPEpVdqgKcXqWeNHoV&currentPage=1&pageSize=10",
+      "handling": "lang tilfeldig tekst (500 tegn)",
+      "skjermdump": "skjermbilder-monkey/monkey-lang-tekst-reflektert-500-7.png",
+      "tid": "2026-04-14T13:11:59.509Z"
+    }
+  ],
+  "besøkte": [
+    "https://tilskudd.fiks.test.ks.no/",
+    "https://tilskudd.fiks.test.ks.no/ordninger?currentPage=1&pageSize=10",
+    "https://tilskudd.fiks.test.ks.no/ordninger/7082abd8-4f23-43e9-adce-c4762b848b81",
+    "https://tilskudd.fiks.test.ks.no/ordninger?searchString=%3Cb%3Ebold%3C%2Fb%3E&currentPage=1&pageSize=10",
+    "https://login.test.idporten.no/authorize/selector",
+    "https://tilskudd.fiks.test.ks.no/ordninger?searchString=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa&currentPage=1&pageSize=10"
+  ]
+}

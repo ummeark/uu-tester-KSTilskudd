@@ -33,17 +33,27 @@
   .seksjon-lenke { font-size: 0.82rem; color: #07604f; text-decoration: none; font-weight: 500; white-space: nowrap; }
   .seksjon-lenke:hover { text-decoration: underline; }
 
-  /* Trend-graf */
+  /* Trend-graf (linjegraf) */
   .trend-graf { padding: 1.2rem 1.6rem; border-bottom: 1px solid #f4f3f1; }
-  .graf-tittel { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #9ca3af; margin-bottom: 0.8rem; }
-  .graf { display: flex; align-items: flex-end; gap: 5px; height: 60px; }
-  .søyle-wrapper { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
-  .søyle { width: 100%; transition: opacity .2s; cursor: pointer; }
-  .søyle:hover { opacity: 0.75; }
-  .søyle.god { background: #07604f; }
-  .søyle.middels { background: #b8860b; }
-  .søyle.dårlig { background: #c53030; }
-  .søyle-dato { font-size: 0.55rem; color: #9ca3af; text-align: center; writing-mode: vertical-rl; transform: rotate(180deg); }
+  .graf-tittel { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #9ca3af; margin-bottom: 0.6rem; }
+  .linje-graf { width: 100%; height: auto; display: block; overflow: visible; }
+  .linje { fill: none; stroke: #cbd5e1; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+  .ref-linje { stroke-dasharray: 5 4; stroke-width: 1; }
+  .ref-linje.ref-god { stroke: rgba(7,96,79,0.4); }
+  .ref-linje.ref-middels { stroke: rgba(184,134,11,0.4); }
+  .ref-etikett { font-size: 18px; font-weight: 700; }
+  .ref-etikett.ref-god { fill: rgba(7,96,79,0.65); }
+  .ref-etikett.ref-middels { fill: rgba(184,134,11,0.65); }
+  .pkt-lenke { cursor: pointer; }
+  .pkt-ring { fill: transparent; }
+  .pkt { transition: r .15s; }
+  .pkt.god { fill: #07604f; }
+  .pkt.middels { fill: #b8860b; }
+  .pkt.dårlig { fill: #c53030; }
+  .pkt-lenke:hover .pkt { r: 9; }
+  .pkt-lenke:hover .linje-graf .linje { stroke: #0a1355; }
+  .pkt-score { font-size: 18px; font-weight: 700; fill: #374151; }
+  .pkt-dato { font-size: 17px; fill: #9ca3af; }
 
   /* Rapportliste */
   .rapport-liste { display: flex; flex-direction: column; }
@@ -124,41 +134,42 @@
     </div>
     <div class="trend-graf">
       <div class="graf-tittel">Score-utvikling</div>
-      <div class="graf">
-    
-      <div class="søyle-wrapper" title="2026-04-09: 97 poeng">
-        <a href="arkiv/2026-04-09/uu-rapport.html" style="width:100%;display:flex;flex-direction:column;align-items:center;flex:1;justify-content:flex-end">
-          <div class="søyle god" style="height:97%"></div>
-        </a>
-        <span class="søyle-dato">04-09</span>
-      </div>
-      <div class="søyle-wrapper" title="2026-04-10: 72 poeng">
-        <a href="arkiv/2026-04-10/uu-rapport.html" style="width:100%;display:flex;flex-direction:column;align-items:center;flex:1;justify-content:flex-end">
-          <div class="søyle middels" style="height:72%"></div>
-        </a>
-        <span class="søyle-dato">04-10</span>
-      </div>
-      <div class="søyle-wrapper" title="2026-04-13: 67 poeng">
-        <a href="arkiv/2026-04-13/uu-rapport.html" style="width:100%;display:flex;flex-direction:column;align-items:center;flex:1;justify-content:flex-end">
-          <div class="søyle middels" style="height:67%"></div>
-        </a>
-        <span class="søyle-dato">04-13</span>
-      </div>
-      <div class="søyle-wrapper" title="2026-04-14: 72 poeng">
-        <a href="arkiv/2026-04-14/uu-rapport-14-49.html" style="width:100%;display:flex;flex-direction:column;align-items:center;flex:1;justify-content:flex-end">
-          <div class="søyle middels" style="height:72%"></div>
-        </a>
-        <span class="søyle-dato">04-14</span>
-      </div>
-  </div>
+      <svg class="linje-graf" viewBox="0 0 1000 160" preserveAspectRatio="xMidYMid meet">
+    <line class="ref-linje ref-god" x1="36" y1="49.2" x2="984" y2="49.2"/>
+    <text class="ref-etikett ref-god" x="31" y="53.2" text-anchor="end">80</text>
+    <line class="ref-linje ref-middels" x1="36" y1="81" x2="984" y2="81"/>
+    <text class="ref-etikett ref-middels" x="31" y="85" text-anchor="end">50</text>
+    <polyline class="linje" points="36,31.18 352,57.68000000000001 668,62.980000000000004 984,57.68000000000001"/>
+    <a class="pkt-lenke" href="arkiv/2026-04-09/uu-rapport.html" title="torsdag 9. april 2026: 97 poeng">
+      <circle class="pkt-ring" cx="36" cy="31.18" r="14"/>
+      <circle class="pkt god" cx="36" cy="31.18" r="6"/>
+      <text class="pkt-score" x="36" y="20.18" text-anchor="middle">97</text>
+      <text class="pkt-dato" x="36" y="158" text-anchor="middle">04/09</text>
+    </a><a class="pkt-lenke" href="arkiv/2026-04-10/uu-rapport.html" title="fredag 10. april 2026: 72 poeng">
+      <circle class="pkt-ring" cx="352" cy="57.68000000000001" r="14"/>
+      <circle class="pkt middels" cx="352" cy="57.68000000000001" r="6"/>
+      <text class="pkt-score" x="352" y="46.68000000000001" text-anchor="middle">72</text>
+      <text class="pkt-dato" x="352" y="158" text-anchor="middle">04/10</text>
+    </a><a class="pkt-lenke" href="arkiv/2026-04-13/uu-rapport.html" title="mandag 13. april 2026: 67 poeng">
+      <circle class="pkt-ring" cx="668" cy="62.980000000000004" r="14"/>
+      <circle class="pkt middels" cx="668" cy="62.980000000000004" r="6"/>
+      <text class="pkt-score" x="668" y="51.980000000000004" text-anchor="middle">67</text>
+      <text class="pkt-dato" x="668" y="158" text-anchor="middle">04/13</text>
+    </a><a class="pkt-lenke" href="arkiv/2026-04-14/uu-rapport-15-11.html" title="tirsdag 14. april 2026: 72 poeng">
+      <circle class="pkt-ring" cx="984" cy="57.68000000000001" r="14"/>
+      <circle class="pkt middels" cx="984" cy="57.68000000000001" r="6"/>
+      <text class="pkt-score" x="984" y="46.68000000000001" text-anchor="middle">72</text>
+      <text class="pkt-dato" x="984" y="158" text-anchor="middle">04/14</text>
+    </a>
+  </svg>
     </div>
     <div class="rapport-liste">
       
-    <a class="rapport-rad middels" href="arkiv/2026-04-14/uu-rapport-14-49.html">
+    <a class="rapport-rad middels" href="arkiv/2026-04-14/uu-rapport-15-11.html">
       <div class="score-boble middels">72</div>
       <div class="dato-info">
         <h3>tirsdag 14. april 2026</h3>
-        <p>2026-04-14 · 14:49 &nbsp; <span class="trend opp">↑ +5</span></p>
+        <p>2026-04-14 · 15:11 &nbsp; <span class="trend opp">↑ +5</span></p>
       </div>
       <div class="nøkkeltall">
   <span><b class="rød">WCAG 1</b></span>
@@ -167,6 +178,25 @@
       <div class="åpne-knapp">Se rapport →</div>
     </a>
     
+    <details class="tidl-gruppe">
+      <summary class="tidl-summary">
+        <span class="tidl-chevron">▶</span>
+        1 tidligere kjøring samme dag
+      </summary>
+      
+      <a class="rapport-rad middels tidl-rad" href="arkiv/2026-04-14/uu-rapport-14-49.html">
+        <div class="score-boble middels">72</div>
+        <div class="dato-info">
+          <h3>14:49</h3>
+          <p>Tidligere kjøring</p>
+        </div>
+        <div class="nøkkeltall">
+  <span><b class="rød">WCAG 1</b></span>
+  <span><b class="rød">Lenker 5</b></span>
+  <span>9 sider</span></div>
+        <div class="åpne-knapp">Se rapport →</div>
+      </a>
+    </details>
     <a class="rapport-rad middels" href="arkiv/2026-04-13/uu-rapport.html">
       <div class="score-boble middels">67</div>
       <div class="dato-info">
@@ -218,29 +248,32 @@
     </div>
     <div class="trend-graf">
       <div class="graf-tittel">Score-utvikling</div>
-      <div class="graf">
-    
-      <div class="søyle-wrapper" title="2026-04-13: 60 poeng">
-        <a href="arkiv/2026-04-13/monkey-rapport.html" style="width:100%;display:flex;flex-direction:column;align-items:center;flex:1;justify-content:flex-end">
-          <div class="søyle middels" style="height:60%"></div>
-        </a>
-        <span class="søyle-dato">04-13</span>
-      </div>
-      <div class="søyle-wrapper" title="2026-04-14: 0 poeng">
-        <a href="arkiv/2026-04-14/monkey-rapport-14-53.html" style="width:100%;display:flex;flex-direction:column;align-items:center;flex:1;justify-content:flex-end">
-          <div class="søyle dårlig" style="height:0%"></div>
-        </a>
-        <span class="søyle-dato">04-14</span>
-      </div>
-  </div>
+      <svg class="linje-graf" viewBox="0 0 1000 160" preserveAspectRatio="xMidYMid meet">
+    <line class="ref-linje ref-god" x1="36" y1="49.2" x2="984" y2="49.2"/>
+    <text class="ref-etikett ref-god" x="31" y="53.2" text-anchor="end">80</text>
+    <line class="ref-linje ref-middels" x1="36" y1="81" x2="984" y2="81"/>
+    <text class="ref-etikett ref-middels" x="31" y="85" text-anchor="end">50</text>
+    <polyline class="linje" points="36,70.4 984,134"/>
+    <a class="pkt-lenke" href="arkiv/2026-04-13/monkey-rapport.html" title="mandag 13. april 2026: 60 poeng">
+      <circle class="pkt-ring" cx="36" cy="70.4" r="14"/>
+      <circle class="pkt middels" cx="36" cy="70.4" r="6"/>
+      <text class="pkt-score" x="36" y="59.400000000000006" text-anchor="middle">60</text>
+      <text class="pkt-dato" x="36" y="158" text-anchor="middle">04/13</text>
+    </a><a class="pkt-lenke" href="arkiv/2026-04-14/monkey-rapport-15-17.html" title="tirsdag 14. april 2026: 0 poeng">
+      <circle class="pkt-ring" cx="984" cy="134" r="14"/>
+      <circle class="pkt dårlig" cx="984" cy="134" r="6"/>
+      <text class="pkt-score" x="984" y="123" text-anchor="middle">0</text>
+      <text class="pkt-dato" x="984" y="158" text-anchor="middle">04/14</text>
+    </a>
+  </svg>
     </div>
     <div class="rapport-liste">
       
-    <a class="rapport-rad dårlig" href="arkiv/2026-04-14/monkey-rapport-14-53.html">
+    <a class="rapport-rad dårlig" href="arkiv/2026-04-14/monkey-rapport-15-17.html">
       <div class="score-boble dårlig">0</div>
       <div class="dato-info">
         <h3>tirsdag 14. april 2026</h3>
-        <p>2026-04-14 · 14:53 &nbsp; <span class="trend ned">↓ -60</span></p>
+        <p>2026-04-14 · 15:17 &nbsp; <span class="trend ned">↓ -60</span></p>
       </div>
       <div class="nøkkeltall">
   <span><b class="rød">JS-feil 3</b></span>
@@ -252,9 +285,33 @@
     <details class="tidl-gruppe">
       <summary class="tidl-summary">
         <span class="tidl-chevron">▶</span>
-        1 tidligere kjøring samme dag
+        3 tidligere kjøringer samme dag
       </summary>
       
+      <a class="rapport-rad dårlig tidl-rad" href="arkiv/2026-04-14/monkey-rapport-15-11.html">
+        <div class="score-boble dårlig">26</div>
+        <div class="dato-info">
+          <h3>15:11</h3>
+          <p>Tidligere kjøring</p>
+        </div>
+        <div class="nøkkeltall">
+  <span><b class="rød">JS-feil 3</b></span>
+  <span><b class="rød">Kritiske 2</b></span>
+  <span>60 iterasjoner</span></div>
+        <div class="åpne-knapp">Se rapport →</div>
+      </a>
+      <a class="rapport-rad dårlig tidl-rad" href="arkiv/2026-04-14/monkey-rapport-14-53.html">
+        <div class="score-boble dårlig">0</div>
+        <div class="dato-info">
+          <h3>14:53</h3>
+          <p>Tidligere kjøring</p>
+        </div>
+        <div class="nøkkeltall">
+  <span><b class="rød">JS-feil 3</b></span>
+  <span><b class="rød">Kritiske 4</b></span>
+  <span>60 iterasjoner</span></div>
+        <div class="åpne-knapp">Se rapport →</div>
+      </a>
       <a class="rapport-rad dårlig tidl-rad" href="arkiv/2026-04-14/monkey-rapport-14-50.html">
         <div class="score-boble dårlig">0</div>
         <div class="dato-info">
@@ -293,29 +350,32 @@
     </div>
     <div class="trend-graf">
       <div class="graf-tittel">Score-utvikling</div>
-      <div class="graf">
-    
-      <div class="søyle-wrapper" title="2026-04-13: 67 poeng">
-        <a href="arkiv/2026-04-13/sikkerhet-rapport.html" style="width:100%;display:flex;flex-direction:column;align-items:center;flex:1;justify-content:flex-end">
-          <div class="søyle middels" style="height:67%"></div>
-        </a>
-        <span class="søyle-dato">04-13</span>
-      </div>
-      <div class="søyle-wrapper" title="2026-04-14: 67 poeng">
-        <a href="arkiv/2026-04-14/sikkerhet-rapport-14-51.html" style="width:100%;display:flex;flex-direction:column;align-items:center;flex:1;justify-content:flex-end">
-          <div class="søyle middels" style="height:67%"></div>
-        </a>
-        <span class="søyle-dato">04-14</span>
-      </div>
-  </div>
+      <svg class="linje-graf" viewBox="0 0 1000 160" preserveAspectRatio="xMidYMid meet">
+    <line class="ref-linje ref-god" x1="36" y1="49.2" x2="984" y2="49.2"/>
+    <text class="ref-etikett ref-god" x="31" y="53.2" text-anchor="end">80</text>
+    <line class="ref-linje ref-middels" x1="36" y1="81" x2="984" y2="81"/>
+    <text class="ref-etikett ref-middels" x="31" y="85" text-anchor="end">50</text>
+    <polyline class="linje" points="36,62.980000000000004 984,62.980000000000004"/>
+    <a class="pkt-lenke" href="arkiv/2026-04-13/sikkerhet-rapport.html" title="mandag 13. april 2026: 67 poeng">
+      <circle class="pkt-ring" cx="36" cy="62.980000000000004" r="14"/>
+      <circle class="pkt middels" cx="36" cy="62.980000000000004" r="6"/>
+      <text class="pkt-score" x="36" y="51.980000000000004" text-anchor="middle">67</text>
+      <text class="pkt-dato" x="36" y="158" text-anchor="middle">04/13</text>
+    </a><a class="pkt-lenke" href="arkiv/2026-04-14/sikkerhet-rapport-15-12.html" title="tirsdag 14. april 2026: 67 poeng">
+      <circle class="pkt-ring" cx="984" cy="62.980000000000004" r="14"/>
+      <circle class="pkt middels" cx="984" cy="62.980000000000004" r="6"/>
+      <text class="pkt-score" x="984" y="51.980000000000004" text-anchor="middle">67</text>
+      <text class="pkt-dato" x="984" y="158" text-anchor="middle">04/14</text>
+    </a>
+  </svg>
     </div>
     <div class="rapport-liste">
       
-    <a class="rapport-rad middels" href="arkiv/2026-04-14/sikkerhet-rapport-14-51.html">
+    <a class="rapport-rad middels" href="arkiv/2026-04-14/sikkerhet-rapport-15-12.html">
       <div class="score-boble middels">67</div>
       <div class="dato-info">
         <h3>tirsdag 14. april 2026</h3>
-        <p>2026-04-14 · 14:51 &nbsp; <span class="trend lik">→ 0</span></p>
+        <p>2026-04-14 · 15:12 &nbsp; <span class="trend lik">→ 0</span></p>
       </div>
       <div class="nøkkeltall">
   <span><span class="grønn">Ingen kritiske</span></span>
@@ -324,6 +384,25 @@
       <div class="åpne-knapp">Se rapport →</div>
     </a>
     
+    <details class="tidl-gruppe">
+      <summary class="tidl-summary">
+        <span class="tidl-chevron">▶</span>
+        1 tidligere kjøring samme dag
+      </summary>
+      
+      <a class="rapport-rad middels tidl-rad" href="arkiv/2026-04-14/sikkerhet-rapport-14-51.html">
+        <div class="score-boble middels">67</div>
+        <div class="dato-info">
+          <h3>14:51</h3>
+          <p>Tidligere kjøring</p>
+        </div>
+        <div class="nøkkeltall">
+  <span><span class="grønn">Ingen kritiske</span></span>
+  <span><b class="rød">Alvorlige 2</b></span>
+  <span>8 bestått</span></div>
+        <div class="åpne-knapp">Se rapport →</div>
+      </a>
+    </details>
     <a class="rapport-rad middels" href="arkiv/2026-04-13/sikkerhet-rapport.html">
       <div class="score-boble middels">67</div>
       <div class="dato-info">
@@ -349,29 +428,32 @@
     </div>
     <div class="trend-graf">
       <div class="graf-tittel">Score-utvikling</div>
-      <div class="graf">
-    
-      <div class="søyle-wrapper" title="2026-04-13: 80 poeng">
-        <a href="arkiv/2026-04-13/negativ-rapport.html" style="width:100%;display:flex;flex-direction:column;align-items:center;flex:1;justify-content:flex-end">
-          <div class="søyle god" style="height:80%"></div>
-        </a>
-        <span class="søyle-dato">04-13</span>
-      </div>
-      <div class="søyle-wrapper" title="2026-04-14: 80 poeng">
-        <a href="arkiv/2026-04-14/negativ-rapport-14-51.html" style="width:100%;display:flex;flex-direction:column;align-items:center;flex:1;justify-content:flex-end">
-          <div class="søyle god" style="height:80%"></div>
-        </a>
-        <span class="søyle-dato">04-14</span>
-      </div>
-  </div>
+      <svg class="linje-graf" viewBox="0 0 1000 160" preserveAspectRatio="xMidYMid meet">
+    <line class="ref-linje ref-god" x1="36" y1="49.2" x2="984" y2="49.2"/>
+    <text class="ref-etikett ref-god" x="31" y="53.2" text-anchor="end">80</text>
+    <line class="ref-linje ref-middels" x1="36" y1="81" x2="984" y2="81"/>
+    <text class="ref-etikett ref-middels" x="31" y="85" text-anchor="end">50</text>
+    <polyline class="linje" points="36,49.2 984,49.2"/>
+    <a class="pkt-lenke" href="arkiv/2026-04-13/negativ-rapport.html" title="mandag 13. april 2026: 80 poeng">
+      <circle class="pkt-ring" cx="36" cy="49.2" r="14"/>
+      <circle class="pkt god" cx="36" cy="49.2" r="6"/>
+      <text class="pkt-score" x="36" y="38.2" text-anchor="middle">80</text>
+      <text class="pkt-dato" x="36" y="158" text-anchor="middle">04/13</text>
+    </a><a class="pkt-lenke" href="arkiv/2026-04-14/negativ-rapport-15-12.html" title="tirsdag 14. april 2026: 80 poeng">
+      <circle class="pkt-ring" cx="984" cy="49.2" r="14"/>
+      <circle class="pkt god" cx="984" cy="49.2" r="6"/>
+      <text class="pkt-score" x="984" y="38.2" text-anchor="middle">80</text>
+      <text class="pkt-dato" x="984" y="158" text-anchor="middle">04/14</text>
+    </a>
+  </svg>
     </div>
     <div class="rapport-liste">
       
-    <a class="rapport-rad god" href="arkiv/2026-04-14/negativ-rapport-14-51.html">
+    <a class="rapport-rad god" href="arkiv/2026-04-14/negativ-rapport-15-12.html">
       <div class="score-boble god">80</div>
       <div class="dato-info">
         <h3>tirsdag 14. april 2026</h3>
-        <p>2026-04-14 · 14:51 &nbsp; <span class="trend lik">→ 0</span></p>
+        <p>2026-04-14 · 15:12 &nbsp; <span class="trend lik">→ 0</span></p>
       </div>
       <div class="nøkkeltall">
   <span><span class="grønn">Bestått 19</span></span>
@@ -380,6 +462,25 @@
       <div class="åpne-knapp">Se rapport →</div>
     </a>
     
+    <details class="tidl-gruppe">
+      <summary class="tidl-summary">
+        <span class="tidl-chevron">▶</span>
+        1 tidligere kjøring samme dag
+      </summary>
+      
+      <a class="rapport-rad god tidl-rad" href="arkiv/2026-04-14/negativ-rapport-14-51.html">
+        <div class="score-boble god">80</div>
+        <div class="dato-info">
+          <h3>14:51</h3>
+          <p>Tidligere kjøring</p>
+        </div>
+        <div class="nøkkeltall">
+  <span><span class="grønn">Bestått 19</span></span>
+  <span><b class="rød">Advarsler 4</b></span>
+  <span><span class="grønn">Ingen feil</span></span></div>
+        <div class="åpne-knapp">Se rapport →</div>
+      </a>
+    </details>
     <a class="rapport-rad god" href="arkiv/2026-04-13/negativ-rapport.html">
       <div class="score-boble god">80</div>
       <div class="dato-info">

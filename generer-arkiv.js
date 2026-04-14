@@ -183,15 +183,43 @@ function trendPil(nyScore, gammelScore) {
 
 function grafHTML(sistePerDato) {
   if (sistePerDato.length === 0) return '<p style="color:#9ca3af;font-size:0.82rem">Ingen data ennå.</p>';
-  return `<div class="graf">
-    ${[...sistePerDato].reverse().map(r => `
-      <div class="søyle-wrapper" title="${r.dato}: ${r.score} poeng">
-        <a href="arkiv/${r.dato}/${r.rapportFil}" style="width:100%;display:flex;flex-direction:column;align-items:center;flex:1;justify-content:flex-end">
-          <div class="søyle ${scoreKlasse(r.score)}" style="height:${r.score}%"></div>
-        </a>
-        <span class="søyle-dato">${r.dato.slice(5)}</span>
-      </div>`).join('')}
-  </div>`;
+
+  const punkter = [...sistePerDato].reverse(); // eldst til venstre, nyest til høyre
+  const n = punkter.length;
+
+  const VW = 1000, VH = 160;
+  const padT = 28, padB = 26, padL = 36, padR = 16;
+  const cW = VW - padL - padR;
+  const cH = VH - padT - padB;
+
+  const xOf = i => padL + (n === 1 ? cW / 2 : i * cW / (n - 1));
+  const yOf = score => padT + (100 - score) / 100 * cH;
+
+  const refLinje = (score, cls, label) => {
+    const y = yOf(score);
+    return `<line class="ref-linje ${cls}" x1="${padL}" y1="${y}" x2="${VW - padR}" y2="${y}"/>
+    <text class="ref-etikett ${cls}" x="${padL - 5}" y="${y + 4}" text-anchor="end">${label}</text>`;
+  };
+
+  const polylinePts = punkter.map((r, i) => `${xOf(i)},${yOf(r.score)}`).join(' ');
+
+  const sirkler = punkter.map((r, i) => {
+    const x = xOf(i), y = yOf(r.score), cls = scoreKlasse(r.score);
+    const dato = r.dato.slice(5).replace('-', '/');
+    return `<a class="pkt-lenke" href="arkiv/${r.dato}/${r.rapportFil}" title="${norskDato(r.dato)}: ${r.score} poeng">
+      <circle class="pkt-ring" cx="${x}" cy="${y}" r="14"/>
+      <circle class="pkt ${cls}" cx="${x}" cy="${y}" r="6"/>
+      <text class="pkt-score" x="${x}" y="${y - 11}" text-anchor="middle">${r.score}</text>
+      <text class="pkt-dato" x="${x}" y="${VH - 2}" text-anchor="middle">${dato}</text>
+    </a>`;
+  }).join('');
+
+  return `<svg class="linje-graf" viewBox="0 0 ${VW} ${VH}" preserveAspectRatio="xMidYMid meet">
+    ${refLinje(80, 'ref-god', '80')}
+    ${refLinje(50, 'ref-middels', '50')}
+    <polyline class="linje" points="${polylinePts}"/>
+    ${sirkler}
+  </svg>`;
 }
 
 // --- Nøkkeltall per testtype ---
@@ -324,17 +352,27 @@ const arkivHTML = `<!DOCTYPE html>
   .seksjon-lenke { font-size: 0.82rem; color: #07604f; text-decoration: none; font-weight: 500; white-space: nowrap; }
   .seksjon-lenke:hover { text-decoration: underline; }
 
-  /* Trend-graf */
+  /* Trend-graf (linjegraf) */
   .trend-graf { padding: 1.2rem 1.6rem; border-bottom: 1px solid #f4f3f1; }
-  .graf-tittel { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #9ca3af; margin-bottom: 0.8rem; }
-  .graf { display: flex; align-items: flex-end; gap: 5px; height: 60px; }
-  .søyle-wrapper { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
-  .søyle { width: 100%; transition: opacity .2s; cursor: pointer; }
-  .søyle:hover { opacity: 0.75; }
-  .søyle.god { background: #07604f; }
-  .søyle.middels { background: #b8860b; }
-  .søyle.dårlig { background: #c53030; }
-  .søyle-dato { font-size: 0.55rem; color: #9ca3af; text-align: center; writing-mode: vertical-rl; transform: rotate(180deg); }
+  .graf-tittel { font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #9ca3af; margin-bottom: 0.6rem; }
+  .linje-graf { width: 100%; height: auto; display: block; overflow: visible; }
+  .linje { fill: none; stroke: #cbd5e1; stroke-width: 2.5; stroke-linejoin: round; stroke-linecap: round; }
+  .ref-linje { stroke-dasharray: 5 4; stroke-width: 1; }
+  .ref-linje.ref-god { stroke: rgba(7,96,79,0.4); }
+  .ref-linje.ref-middels { stroke: rgba(184,134,11,0.4); }
+  .ref-etikett { font-size: 18px; font-weight: 700; }
+  .ref-etikett.ref-god { fill: rgba(7,96,79,0.65); }
+  .ref-etikett.ref-middels { fill: rgba(184,134,11,0.65); }
+  .pkt-lenke { cursor: pointer; }
+  .pkt-ring { fill: transparent; }
+  .pkt { transition: r .15s; }
+  .pkt.god { fill: #07604f; }
+  .pkt.middels { fill: #b8860b; }
+  .pkt.dårlig { fill: #c53030; }
+  .pkt-lenke:hover .pkt { r: 9; }
+  .pkt-lenke:hover .linje-graf .linje { stroke: #0a1355; }
+  .pkt-score { font-size: 18px; font-weight: 700; fill: #374151; }
+  .pkt-dato { font-size: 17px; fill: #9ca3af; }
 
   /* Rapportliste */
   .rapport-liste { display: flex; flex-direction: column; }
