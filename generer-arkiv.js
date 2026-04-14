@@ -266,7 +266,7 @@ const arkivHTML = `<!DOCTYPE html>
     <div>
       <div class="header-merkevare">KS Tilskudd · Testrapporter</div>
       <h1>Arkiv</h1>
-      <p>Historikk for alle fire testtyper</p>
+      <p>Historikk for alle testene</p>
     </div>
     <nav class="header-nav">
       <a href="rapport.html">UU-rapport</a>
