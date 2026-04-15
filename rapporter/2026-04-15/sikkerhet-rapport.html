@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sikkerhetsrapport – 2026-04-15 09:41</title>
+<title>Sikkerhetsrapport – 2026-04-15 09:55</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:system-ui,-apple-system,sans-serif;background:#faf6f0;color:#0f0e17;display:flex;min-height:100vh}
@@ -70,7 +70,7 @@
 <nav class="sidemeny">
   <div class="sidemeny-header">
     <div class="sidemeny-logo">KS Tilskudd · Sikkerhetstester</div>
-    <h1>Sikkerhetsrapport <span>2026-04-15 09:41</span></h1>
+    <h1>Sikkerhetsrapport <span>2026-04-15 09:55</span></h1>
   </div>
   <ul><li><a href="#hoder" class="sidenav-link ok">
     <span class="sidenavn">📋 HTTP-sikkerhetshoder</span>
@@ -102,7 +102,7 @@
   <div class="rapport-header">
     <div>
       <h1>Sikkerhetsrapport</h1>
-      <div class="meta"><a href="https://tilskudd.fiks.test.ks.no/" target="_blank">https://tilskudd.fiks.test.ks.no/</a> · 2026-04-15 09:41 · 4s</div>
+      <div class="meta"><a href="https://tilskudd.fiks.test.ks.no/" target="_blank">https://tilskudd.fiks.test.ks.no/</a> · 2026-04-15 09:55 · 5s</div>
     </div>
     <div class="nav-knapper">
       <a href="rapport.html" class="knapp sekundær">Forside</a>
@@ -308,7 +308,17 @@
   </details>
   </div>
 
-  <footer>KS Tilskudd · Sikkerhetstester · Playwright · 2026-04-15 09:41</footer>
+  <div class="seksjon" style="margin-top:2rem">
+    <div class="seksjon-tittel">Slik beregnes sikkerhetsscoren</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem;font-size:.82rem;font-family:ui-monospace,monospace;margin-bottom:.9rem">
+      <span style="color:#374151">Kritisk funn</span><span style="color:#c53030;font-weight:700">× 20 poeng</span>
+      <span style="color:#374151">Alvorlig funn</span><span style="color:#9a3412;font-weight:700">× 10 poeng</span>
+      <span style="color:#374151">Moderat funn</span><span style="color:#713f12;font-weight:700">× 5 poeng</span>
+      <span style="color:#374151">Lavt funn</span><span style="color:#6b7280;font-weight:700">× 2 poeng</span>
+    </div>
+    <p style="font-size:.78rem;color:#6b7280;font-family:ui-monospace,monospace">Score = maks(0, 100 − sum av trekk) &nbsp;·&nbsp; <span style="color:#07604f;font-weight:600">Grønn ≥ 80</span> &nbsp;·&nbsp; <span style="color:#b8860b;font-weight:600">Gul 50–79</span> &nbsp;·&nbsp; <span style="color:#c53030;font-weight:600">Rød &lt; 50</span></p>
+  </div>
+  <footer>KS Tilskudd · Sikkerhetstester · Playwright · 2026-04-15 09:55</footer>
 </div>
 </body>
 </html>

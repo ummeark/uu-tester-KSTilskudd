@@ -675,10 +675,6 @@ function genererRapport(url, dato, tidspunkt, totalt, sider) {
       <a href="arkiv.html" class="knapp sekundær">Tidligere rapporter</a>
     </div>
   </div>
-  <div class="score-kort">
-    <div class="score-sirkel ${scoreKlasse}">${s}</div>
-    <div class="score-tekst"><strong>UU-score</strong><p>Basert på WCAG-brudd, døde lenker og manglende labels på tvers av ${totalt.sider} sider. Klikk på skjermdumper for å forstørre.</p></div>
-  </div>
   <div class="seksjon" style="background:#f4ecdf;border-color:#e8dcc8;margin-bottom:1.5rem">
     <div class="seksjon-tittel">Hva er UU-testing?</div>
     <p style="font-size:.88rem;line-height:1.7;color:#374151;margin-bottom:1rem">
@@ -719,6 +715,10 @@ function genererRapport(url, dato, tidspunkt, totalt, sider) {
       </div>
     </div>
   </div>
+  <div class="score-kort">
+    <div class="score-sirkel ${scoreKlasse}">${s}</div>
+    <div class="score-tekst"><strong>UU-score</strong><p>Basert på WCAG-brudd, døde lenker og manglende labels på tvers av ${totalt.sider} sider. Klikk på skjermdumper for å forstørre.</p></div>
+  </div>
 
   <div class="kort-grid">
     <div class="kort ${totalt.sider > 0 ? 'ok' : 'advarsel'}"><div class="tall">${totalt.sider}</div><div class="etikett">Sider testet</div></div>
@@ -729,6 +729,20 @@ function genererRapport(url, dato, tidspunkt, totalt, sider) {
     <div class="kort ${totalt.feltUtenLabel === 0 ? 'ok' : 'advarsel'}"><div class="tall">${totalt.skjemafelt}</div><div class="etikett">Skjemafelt</div><div class="undertekst">${totalt.feltUtenLabel} uten label</div></div>
   </div>
   ${sideDetaljer}
+  <div class="seksjon" style="margin-top:2rem">
+    <div class="seksjon-tittel">Slik beregnes UU-scoren</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem;font-size:.82rem;font-family:ui-monospace,monospace;margin-bottom:.9rem">
+      <span style="color:#374151">Kritisk WCAG-brudd</span><span style="color:#c53030;font-weight:700">× 15 poeng</span>
+      <span style="color:#374151">Alvorlig WCAG-brudd</span><span style="color:#9a3412;font-weight:700">× 8 poeng</span>
+      <span style="color:#374151">Moderat WCAG-brudd</span><span style="color:#713f12;font-weight:700">× 3 poeng</span>
+      <span style="color:#374151">Mindre WCAG-brudd</span><span style="color:#6b7280;font-weight:700">× 1 poeng</span>
+      <span style="color:#374151">Død lenke</span><span style="color:#c53030;font-weight:700">× 5 poeng</span>
+      <span style="color:#374151">Knapp uten label</span><span style="color:#9a3412;font-weight:700">× 4 poeng</span>
+      <span style="color:#374151">Bilde uten alt-tekst</span><span style="color:#9a3412;font-weight:700">× 4 poeng</span>
+      <span style="color:#374151">Skjemafelt uten label</span><span style="color:#9a3412;font-weight:700">× 4 poeng</span>
+    </div>
+    <p style="font-size:.78rem;color:#6b7280;font-family:ui-monospace,monospace">Score = maks(0, 100 − sum av trekk) &nbsp;·&nbsp; <span style="color:#07604f;font-weight:600">Grønn ≥ 80</span> &nbsp;·&nbsp; <span style="color:#b8860b;font-weight:600">Gul 50–79</span> &nbsp;·&nbsp; <span style="color:#c53030;font-weight:600">Rød &lt; 50</span></p>
+  </div>
   <footer>KS Tilskudd · UU-tester · axe-core + Playwright · ${dato} ${tidspunkt}</footer>
 </div>
 </body>

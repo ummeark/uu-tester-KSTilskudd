@@ -684,6 +684,14 @@ const html = `<!DOCTYPE html>
 
   ${seksjoner}
 
+  <div class="seksjon" style="margin-top:2rem">
+    <div class="seksjon-tittel">Slik beregnes robusthetssscoren</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem;font-size:.82rem;font-family:ui-monospace,monospace;margin-bottom:.9rem">
+      <span style="color:#374151">Feil</span><span style="color:#c53030;font-weight:700">× 15 poeng</span>
+      <span style="color:#374151">Advarsel</span><span style="color:#9a3412;font-weight:700">× 5 poeng</span>
+    </div>
+    <p style="font-size:.78rem;color:#6b7280;font-family:ui-monospace,monospace">Score = maks(0, 100 − sum av trekk) &nbsp;·&nbsp; <span style="color:#07604f;font-weight:600">Grønn ≥ 80</span> &nbsp;·&nbsp; <span style="color:#b8860b;font-weight:600">Gul 50–79</span> &nbsp;·&nbsp; <span style="color:#c53030;font-weight:600">Rød &lt; 50</span></p>
+  </div>
   <footer>KS Tilskudd · Negativ testing · Playwright · ${dato} ${tidspunkt}</footer>
 </div>
 </body>

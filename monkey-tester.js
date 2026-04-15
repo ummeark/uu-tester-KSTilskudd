@@ -547,6 +547,17 @@ const html = `<!DOCTYPE html>
     </ul>
   </div>
 
+  <div class="seksjon" style="margin-top:2rem">
+    <div class="seksjon-tittel">Slik beregnes robusthetssscoren</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.3rem .8rem;font-size:.82rem;font-family:ui-monospace,monospace;margin-bottom:.9rem">
+      <span style="color:#374151">Kritisk funn</span><span style="color:#c53030;font-weight:700">× 20 poeng</span>
+      <span style="color:#374151">Alvorlig funn</span><span style="color:#9a3412;font-weight:700">× 10 poeng</span>
+      <span style="color:#374151">JS-feil</span><span style="color:#9a3412;font-weight:700">× 8 poeng</span>
+      <span style="color:#374151">Nettverksfeil</span><span style="color:#713f12;font-weight:700">× 5 poeng</span>
+      <span style="color:#374151">Konsoll-feil</span><span style="color:#6b7280;font-weight:700">× 3 poeng</span>
+    </div>
+    <p style="font-size:.78rem;color:#6b7280;font-family:ui-monospace,monospace">Score = maks(0, 100 − sum av trekk) &nbsp;·&nbsp; <span style="color:#07604f;font-weight:600">Grønn ≥ 80</span> &nbsp;·&nbsp; <span style="color:#b8860b;font-weight:600">Gul 50–79</span> &nbsp;·&nbsp; <span style="color:#c53030;font-weight:600">Rød &lt; 50</span></p>
+  </div>
   <footer>KS Tilskudd · Monkey-tester · Playwright · ${dato} ${tidspunkt}</footer>
 </div>
 </body>
