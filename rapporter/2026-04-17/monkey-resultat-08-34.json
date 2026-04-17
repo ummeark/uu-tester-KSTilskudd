@@ -1,0 +1,88 @@
+{
+  "url": "https://tilskudd.fiks.test.ks.no/",
+  "dato": "2026-04-17",
+  "totalt": {
+    "iterasjoner": 60,
+    "siderBesøkt": 8,
+    "jsErrors": 2,
+    "konsollFeil": 0,
+    "nettverksFeil": 0,
+    "kritiske": 5,
+    "alvorlige": 0,
+    "varighet": 35
+  },
+  "score": 0,
+  "jsErrors": [
+    {
+      "melding": "Minified React error #419; visit https://react.dev/errors/419 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.",
+      "stack": "",
+      "url": "https://tilskudd.fiks.test.ks.no/ordninger/cbc3a2eb-42bd-49db-b2e7-0f66e13a56a0",
+      "tid": "2026-04-17T06:34:54.423Z"
+    },
+    {
+      "melding": "Minified React error #419; visit https://react.dev/errors/419 for the full message or use the non-minified dev environment for full errors and additional helpful warnings.",
+      "stack": "",
+      "url": "https://tilskudd.fiks.test.ks.no/ordninger/cbc3a2eb-42bd-49db-b2e7-0f66e13a56a0",
+      "tid": "2026-04-17T06:34:55.020Z"
+    }
+  ],
+  "konsollFeil": [],
+  "nettverksFeil": [],
+  "interaksjoner": [
+    {
+      "type": "feilside",
+      "alvorlighet": "kritisk",
+      "melding": "Feilside etter klikk: inneholder \"500\"",
+      "url": "https://tilskudd.fiks.test.ks.no/ordninger/b39a60ca-08e4-476c-88a1-a78fe3cd7983",
+      "handling": "Klikket lenke: \"Punktlig Viktig Hund DaStimuleringsmidler til internasjonalt\"",
+      "skjermdump": "skjermbilder-monkey/monkey-feilside-3.png",
+      "tid": "2026-04-17T06:34:31.283Z"
+    },
+    {
+      "type": "feilside",
+      "alvorlighet": "kritisk",
+      "melding": "Feilside etter klikk: inneholder \"500\"",
+      "url": "https://tilskudd.fiks.test.ks.no/ordninger/b39a60ca-08e4-476c-88a1-a78fe3cd7983",
+      "handling": "Klikket lenke: \"Punktlig Viktig Hund DaStimuleringsmidler til internasjonalt\"",
+      "skjermdump": "skjermbilder-monkey/monkey-feilside-5.png",
+      "tid": "2026-04-17T06:34:40.492Z"
+    },
+    {
+      "type": "feilside",
+      "alvorlighet": "kritisk",
+      "melding": "Feilside etter klikk: inneholder \"500\"",
+      "url": "https://tilskudd.fiks.test.ks.no/ordninger/cbc3a2eb-42bd-49db-b2e7-0f66e13a56a0",
+      "handling": "Klikket lenke: \"Punktlig Viktig Hund DaKommunalt næringsfond Kristiansund 20\"",
+      "skjermdump": "skjermbilder-monkey/monkey-feilside-9.png",
+      "tid": "2026-04-17T06:34:54.206Z"
+    },
+    {
+      "type": "feilside",
+      "alvorlighet": "kritisk",
+      "melding": "Feilside etter navigasjon: inneholder \"500\"",
+      "url": "https://tilskudd.fiks.test.ks.no/ordninger/cbc3a2eb-42bd-49db-b2e7-0f66e13a56a0",
+      "handling": "Gikk tilbake (browser back)",
+      "skjermdump": "skjermbilder-monkey/monkey-feilside-10.png",
+      "tid": "2026-04-17T06:34:54.964Z"
+    },
+    {
+      "type": "feilside",
+      "alvorlighet": "kritisk",
+      "melding": "Feilside etter navigasjon: inneholder \"500\"",
+      "url": "https://tilskudd.fiks.test.ks.no/ordninger/cbc3a2eb-42bd-49db-b2e7-0f66e13a56a0",
+      "handling": "Gikk tilbake (browser back)",
+      "skjermdump": "skjermbilder-monkey/monkey-feilside-11.png",
+      "tid": "2026-04-17T06:34:55.563Z"
+    }
+  ],
+  "besøkte": [
+    "https://tilskudd.fiks.test.ks.no/",
+    "https://tilskudd.fiks.test.ks.no/ordninger?currentPage=1&pageSize=10",
+    "https://tilskudd.fiks.test.ks.no/ordninger?currentPage=1&pageSize=10&searchString=Test+bruker",
+    "https://tilskudd.fiks.test.ks.no/ordninger?searchString=%C3%A6%C3%B8%C3%A5+%C3%86%C3%98%C3%85&currentPage=1&pageSize=10",
+    "https://tilskudd.fiks.test.ks.no/ordninger/7082abd8-4f23-43e9-adce-c4762b848b81",
+    "https://login.test.idporten.no/authorize/selector",
+    "https://tilskudd.fiks.test.ks.no/ordninger?currentPage=1&pageSize=10&searchString=%3Cb%3Ebold%3C%2Fb%3E",
+    "https://tilskudd.fiks.test.ks.no/ordninger?currentPage=1&pageSize=10&searchString=%C3%A6%C3%B8%C3%A5+%C3%86%C3%98%C3%85"
+  ]
+}
