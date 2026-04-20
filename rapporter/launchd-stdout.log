@@ -125,3 +125,59 @@
  create mode 100644 rapporter/2026-04-17/uu-rapport.html
  create mode 100644 rapporter/launchd-vakt-stderr.log
  create mode 100644 rapporter/launchd-vakt-stdout.log
+[main c4d4a4b] Daglig UU-rapport 2026-04-20 [skip ci]
+ 64 files changed, 14507 insertions(+), 193 deletions(-)
+ create mode 100644 docs/arkiv/2026-04-20/monkey-rapport-08-30.html
+ create mode 100644 docs/arkiv/2026-04-20/monkey-rapport.html
+ create mode 100644 docs/arkiv/2026-04-20/negativ-rapport-08-31.html
+ create mode 100644 docs/arkiv/2026-04-20/negativ-rapport.html
+ create mode 100644 docs/arkiv/2026-04-20/sikkerhet-rapport-08-30.html
+ create mode 100644 docs/arkiv/2026-04-20/sikkerhet-rapport.html
+ create mode 100644 docs/arkiv/2026-04-20/skjermbilder-monkey/monkey-feilside-1.png
+ create mode 100644 docs/arkiv/2026-04-20/skjermbilder-monkey/monkey-feilside-2.png
+ create mode 100644 docs/arkiv/2026-04-20/skjermbilder-monkey/monkey-pre-submit-3.png
+ create mode 100644 docs/arkiv/2026-04-20/skjermbilder-negativ/negativ-mobil-5.png
+ create mode 100644 docs/arkiv/2026-04-20/skjermbilder-negativ/negativ-url-ingen-feilside-1.png
+ create mode 100644 docs/arkiv/2026-04-20/skjermbilder-negativ/negativ-url-ingen-feilside-2.png
+ create mode 100644 docs/arkiv/2026-04-20/skjermbilder-negativ/negativ-url-ingen-feilside-3.png
+ create mode 100644 docs/arkiv/2026-04-20/skjermbilder-negativ/negativ-url-ingen-feilside-4.png
+ create mode 100644 docs/arkiv/2026-04-20/skjermbilder/s2-page-has-heading-one-0-element.png
+ create mode 100644 docs/arkiv/2026-04-20/skjermbilder/s2-page-has-heading-one-0-side.png
+ create mode 100644 docs/arkiv/2026-04-20/skjermbilder/s4-doede-lenker-side.png
+ create mode 100644 docs/arkiv/2026-04-20/skjermbilder/s5-doede-lenker-side.png
+ create mode 100644 docs/arkiv/2026-04-20/skjermbilder/s6-doede-lenker-side.png
+ create mode 100644 docs/arkiv/2026-04-20/skjermbilder/s7-doede-lenker-side.png
+ create mode 100644 docs/arkiv/2026-04-20/skjermbilder/s8-doede-lenker-side.png
+ create mode 100644 docs/arkiv/2026-04-20/uu-rapport-08-30.html
+ create mode 100644 docs/arkiv/2026-04-20/uu-rapport.html
+ create mode 100644 rapporter/2026-04-20/monkey-rapport-08-30.html
+ create mode 100644 rapporter/2026-04-20/monkey-rapport.html
+ create mode 100644 rapporter/2026-04-20/monkey-resultat-08-30.json
+ create mode 100644 rapporter/2026-04-20/monkey-resultat.json
+ create mode 100644 rapporter/2026-04-20/negativ-rapport-08-31.html
+ create mode 100644 rapporter/2026-04-20/negativ-rapport.html
+ create mode 100644 rapporter/2026-04-20/negativ-resultat-08-31.json
+ create mode 100644 rapporter/2026-04-20/negativ-resultat.json
+ create mode 100644 rapporter/2026-04-20/resultat-08-30.json
+ create mode 100644 rapporter/2026-04-20/resultat.json
+ create mode 100644 rapporter/2026-04-20/sikkerhet-rapport-08-30.html
+ create mode 100644 rapporter/2026-04-20/sikkerhet-rapport.html
+ create mode 100644 rapporter/2026-04-20/sikkerhet-resultat-08-30.json
+ create mode 100644 rapporter/2026-04-20/sikkerhet-resultat.json
+ create mode 100644 rapporter/2026-04-20/skjermbilder-monkey/monkey-feilside-1.png
+ create mode 100644 rapporter/2026-04-20/skjermbilder-monkey/monkey-feilside-2.png
+ create mode 100644 rapporter/2026-04-20/skjermbilder-monkey/monkey-pre-submit-3.png
+ create mode 100644 rapporter/2026-04-20/skjermbilder-negativ/negativ-mobil-5.png
+ create mode 100644 rapporter/2026-04-20/skjermbilder-negativ/negativ-url-ingen-feilside-1.png
+ create mode 100644 rapporter/2026-04-20/skjermbilder-negativ/negativ-url-ingen-feilside-2.png
+ create mode 100644 rapporter/2026-04-20/skjermbilder-negativ/negativ-url-ingen-feilside-3.png
+ create mode 100644 rapporter/2026-04-20/skjermbilder-negativ/negativ-url-ingen-feilside-4.png
+ create mode 100644 rapporter/2026-04-20/skjermbilder/s2-page-has-heading-one-0-element.png
+ create mode 100644 rapporter/2026-04-20/skjermbilder/s2-page-has-heading-one-0-side.png
+ create mode 100644 rapporter/2026-04-20/skjermbilder/s4-doede-lenker-side.png
+ create mode 100644 rapporter/2026-04-20/skjermbilder/s5-doede-lenker-side.png
+ create mode 100644 rapporter/2026-04-20/skjermbilder/s6-doede-lenker-side.png
+ create mode 100644 rapporter/2026-04-20/skjermbilder/s7-doede-lenker-side.png
+ create mode 100644 rapporter/2026-04-20/skjermbilder/s8-doede-lenker-side.png
+ create mode 100644 rapporter/2026-04-20/uu-rapport-08-30.html
+ create mode 100644 rapporter/2026-04-20/uu-rapport.html
