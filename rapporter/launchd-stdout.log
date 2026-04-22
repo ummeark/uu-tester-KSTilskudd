@@ -181,3 +181,19 @@
  create mode 100644 rapporter/2026-04-20/skjermbilder/s8-doede-lenker-side.png
  create mode 100644 rapporter/2026-04-20/uu-rapport-08-30.html
  create mode 100644 rapporter/2026-04-20/uu-rapport.html
+[main d06b6b3] Daglig UU-rapport 2026-04-21 [skip ci]
+ 45 files changed, 7391 insertions(+), 249 deletions(-)
+ create mode 100644 docs/arkiv/2026-04-21/monkey-rapport-08-30.html
+ create mode 100644 docs/arkiv/2026-04-21/negativ-rapport-08-31.html
+ create mode 100644 docs/arkiv/2026-04-21/sikkerhet-rapport-08-30.html
+ create mode 100644 docs/arkiv/2026-04-21/skjermbilder-monkey/monkey-pre-submit-3.png
+ create mode 100644 docs/arkiv/2026-04-21/uu-rapport-08-30.html
+ create mode 100644 rapporter/2026-04-21/monkey-rapport-08-30.html
+ create mode 100644 rapporter/2026-04-21/monkey-resultat-08-30.json
+ create mode 100644 rapporter/2026-04-21/negativ-rapport-08-31.html
+ create mode 100644 rapporter/2026-04-21/negativ-resultat-08-31.json
+ create mode 100644 rapporter/2026-04-21/resultat-08-30.json
+ create mode 100644 rapporter/2026-04-21/sikkerhet-rapport-08-30.html
+ create mode 100644 rapporter/2026-04-21/sikkerhet-resultat-08-30.json
+ create mode 100644 rapporter/2026-04-21/skjermbilder-monkey/monkey-pre-submit-3.png
+ create mode 100644 rapporter/2026-04-21/uu-rapport-08-30.html
