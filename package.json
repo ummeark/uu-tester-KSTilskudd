@@ -10,6 +10,7 @@
     "negativ": "node negativ-tester.js",
     "ytelse": "node ytelse-tester.js",
     "arkiv": "node generer-arkiv.js",
+    "testdata": "node testdata/generer-testdata.js",
     "valider": "bash valider-miljø.sh",
     "prepare": "git config core.hooksPath .githooks"
   },
