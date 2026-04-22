@@ -39,9 +39,9 @@
   .dash-kort.dårlig { border-top-color: #c53030; }
   .dash-kort.ingen-data { opacity: 0.5; cursor: default; }
 
-  .dash-topp { display: flex; align-items: center; gap: 0.5rem; }
-  .dash-ikon { font-size: 1.3rem; }
-  .dash-tittel { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #6b7280; }
+  .dash-topp { display: flex; align-items: flex-start; gap: 0.5rem; min-height: 2.6rem; }
+  .dash-ikon { font-size: 1.3rem; line-height: 1.15rem; }
+  .dash-tittel { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #6b7280; overflow-wrap: break-word; }
 
   .dash-score { font-size: 3rem; font-weight: 800; line-height: 1; color: #0a1355; }
   .dash-score.god { color: #07604f; }
@@ -158,7 +158,7 @@
   <a class="dash-kort middels" href="sikkerhet-rapport.html">
     <div class="dash-topp">
       <span class="dash-ikon">🔐</span>
-      <span class="dash-tittel">Sikkerhetstest</span>
+      <span class="dash-tittel">Sikkerhets-test</span>
     </div>
     <div class="dash-score middels">67<span class="dash-score-enhet">/100</span></div>
     <div class="dash-dato">onsdag 22. april 2026</div>
@@ -186,7 +186,7 @@
   <a class="dash-kort god" href="ytelse-rapport.html">
     <div class="dash-topp">
       <span class="dash-ikon">🚀</span>
-      <span class="dash-tittel">Ytelsestest</span>
+      <span class="dash-tittel">Ytelses-test</span>
     </div>
     <div class="dash-score god">100<span class="dash-score-enhet">/100</span></div>
     <div class="dash-dato">onsdag 22. april 2026</div>

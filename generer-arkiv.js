@@ -579,9 +579,9 @@ const dashboardHTML = `<!DOCTYPE html>
   .dash-kort.dårlig { border-top-color: #c53030; }
   .dash-kort.ingen-data { opacity: 0.5; cursor: default; }
 
-  .dash-topp { display: flex; align-items: center; gap: 0.5rem; }
-  .dash-ikon { font-size: 1.3rem; }
-  .dash-tittel { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #6b7280; }
+  .dash-topp { display: flex; align-items: flex-start; gap: 0.5rem; min-height: 2.6rem; }
+  .dash-ikon { font-size: 1.3rem; line-height: 1.15rem; }
+  .dash-tittel { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #6b7280; overflow-wrap: break-word; }
 
   .dash-score { font-size: 3rem; font-weight: 800; line-height: 1; color: #0a1355; }
   .dash-score.god { color: #07604f; }
@@ -681,7 +681,7 @@ const dashboardHTML = `<!DOCTYPE html>
       <span>${r.totalt.jsErrors > 0 ? `<b class="rød">${r.totalt.jsErrors} JS-feil</b>` : '<span class="grønn">Ingen JS-feil</span>'}</span>
       <span>${r.totalt.kritiske > 0 ? `<b class="rød">${r.totalt.kritiske} kritiske funn</b>` : '<span class="grønn">Ingen kritiske funn</span>'}</span>
       <span>${r.totalt.iterasjoner} iterasjoner</span>`)}
-    ${dashboardKort('Sikkerhetstest', '🔐', 'sikkerhet-rapport.html', sisteSikk, r => `
+    ${dashboardKort('Sikkerhets-test', '🔐', 'sikkerhet-rapport.html', sisteSikk, r => `
       <span>${r.totalt.kritiske > 0 ? `<b class="rød">${r.totalt.kritiske} kritiske</b>` : '<span class="grønn">Ingen kritiske</span>'}</span>
       <span>${r.totalt.alvorlige > 0 ? `<b class="rød">${r.totalt.alvorlige} alvorlige</b>` : '<span class="grønn">Ingen alvorlige</span>'}</span>
       <span>${r.totalt.ok} sjekker bestått</span>`)}
@@ -689,7 +689,7 @@ const dashboardHTML = `<!DOCTYPE html>
       <span><span class="grønn">${r.totalt.bestått} bestått</span></span>
       <span>${r.totalt.advarsel > 0 ? `<b class="rød">${r.totalt.advarsel} advarsler</b>` : '<span class="grønn">Ingen advarsler</span>'}</span>
       <span>${r.totalt.feil > 0 ? `<b class="rød">${r.totalt.feil} feil</b>` : '<span class="grønn">Ingen feil</span>'}</span>`)}
-    ${dashboardKort('Ytelsestest', '🚀', 'ytelse-rapport.html', sisteYtelse, r => `
+    ${dashboardKort('Ytelses-test', '🚀', 'ytelse-rapport.html', sisteYtelse, r => `
       <span>LCP: ${visTid(r.totalt.snittLCP || 0)}</span>
       <span>FCP: ${visTid(r.totalt.snittFCP || 0)}</span>
       <span>${r.totalt.sider} sider</span>`)}
