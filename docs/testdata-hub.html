@@ -2067,7 +2067,7 @@ function rendrer(rader) {
 }
 
 function byggDetalj(d, idx) {
-  const avsnittHtml = d.avsnitt.map(a => `
+  const avsnittHtml = (d.avsnitt ?? []).map(a => `
     <h4>${esc(a.overskrift)}</h4>
     <div>${a.innhold}</div>`).join('');
 
@@ -2083,11 +2083,11 @@ function byggDetalj(d, idx) {
       </div>
       <div class="detalj-felt">
         <label>Forvalter</label>
-        <span>${esc(d.forvalter.navn)} (${esc(d.forvalter.organisasjonsnummer)})</span>
+        <span>${esc(d.forvalter?.navn)} (${esc(d.forvalter?.organisasjonsnummer)})</span>
       </div>
       <div class="detalj-felt">
         <label>Kontakt</label>
-        <span><a href="mailto:${esc(d.forvalter.kontaktEpost)}">${esc(d.forvalter.kontaktEpost)}</a></span>
+        <span><a href="mailto:${esc(d.forvalter?.kontaktEpost)}">${esc(d.forvalter?.kontaktEpost)}</a></span>
       </div>
       <div class="detalj-felt">
         <label>Publisert</label>
@@ -2099,7 +2099,7 @@ function byggDetalj(d, idx) {
       </div>
       <div class="detalj-felt">
         <label>Næringer</label>
-        <span>${esc(d.naeringer.join(', '))}</span>
+        <span>${esc((d.naeringer ?? []).join(', '))}</span>
       </div>
     </div>
     <div><em style="font-size:.83rem;color:#555">${esc(d.kortBeskrivelse)}</em></div>
