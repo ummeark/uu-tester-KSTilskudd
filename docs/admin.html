@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin – KS Tilskudd Tester</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #1e293b;
+      color: white;
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    header h1 { font-size: 1.15rem; font-weight: 600; }
+    header p  { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: .15rem; }
+    .env-badge {
+      font-size: .6rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      background: rgba(255,255,255,.15); color: white;
+      padding: .2rem .6rem; border-radius: 100px;
+    }
+
+    /* ── Layout ── */
+    main { max-width: 1000px; margin: 0 auto; padding: 2rem 1.5rem; }
+
+    /* ── Stats bar ── */
+    .stats {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .stat-kort {
+      background: white; border: 1px solid #e2e8f0; border-radius: 10px;
+      padding: .75rem 1.25rem; flex: 1; min-width: 120px; text-align: center;
+    }
+    .stat-kort .tall { font-size: 1.6rem; font-weight: 700; line-height: 1; }
+    .stat-kort .etikett { font-size: .75rem; color: #64748b; margin-top: .25rem; }
+
+    /* ── Filter ── */
+    .filter-rad {
+      display: flex; gap: .5rem; flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+    .filter-knapp {
+      border: 1.5px solid #cbd5e1; background: white; color: #475569;
+      padding: .35rem .9rem; border-radius: 100px; font-size: .8rem;
+      cursor: pointer; transition: all .15s;
+    }
+    .filter-knapp:hover { border-color: #94a3b8; }
+    .filter-knapp.aktiv { background: #1e293b; color: white; border-color: #1e293b; }
+
+    /* ── Gruppe ── */
+    .gruppe { margin-bottom: 2.5rem; }
+    .gruppe-tittel {
+      font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: #94a3b8;
+      margin-bottom: .75rem; padding-bottom: .5rem;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .gruppe-teller {
+      background: #e2e8f0; color: #64748b;
+      font-size: .65rem; padding: .1rem .45rem; border-radius: 100px;
+      font-weight: 600;
+    }
+
+    /* ── Kort ── */
+    .kort-liste { display: flex; flex-direction: column; gap: .75rem; }
+    .kort {
+      background: white; border: 1px solid #e2e8f0; border-radius: 10px;
+      padding: 1rem 1.25rem;
+      display: grid; grid-template-columns: auto 1fr auto;
+      gap: .25rem 1rem; align-items: start;
+    }
+    .kort-dato {
+      font-size: .75rem; color: #94a3b8; white-space: nowrap;
+      grid-row: 1 / 3; align-self: center;
+    }
+    .kort-tittel { font-size: .9rem; font-weight: 600; color: #0f172a; }
+    .kort-besk   { font-size: .82rem; color: #475569; line-height: 1.5; margin-top: .2rem; }
+    .kort-filer  {
+      display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .5rem;
+    }
+    .fil-tag {
+      background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0;
+      font-size: .7rem; padding: .1rem .45rem; border-radius: 4px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+    }
+    .status-badge {
+      font-size: .65rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .05em; padding: .2rem .55rem; border-radius: 100px;
+      white-space: nowrap; align-self: start;
+    }
+    .status-ferdig    { background: #dcfce7; color: #166534; }
+    .status-pågår     { background: #fef3c7; color: #92400e; }
+    .status-planlagt  { background: #e0e7ff; color: #3730a3; }
+
+    /* ── Type-farger ── */
+    .type-refaktorering  { --c: #7c3aed; }
+    .type-ny-funksjonalitet { --c: #0891b2; }
+    .type-dokumentasjon  { --c: #059669; }
+    .type-automatisering { --c: #d97706; }
+    .type-bugfix         { --c: #dc2626; }
+
+    .kort { border-left: 3px solid var(--c, #cbd5e1); }
+
+    /* ── Tom tilstand ── */
+    .tom { text-align: center; color: #94a3b8; padding: 3rem 0; font-size: .9rem; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center; font-size: .75rem; color: #94a3b8;
+      padding: 2rem; border-top: 1px solid #e2e8f0; margin-top: 1rem;
+    }
+    footer a { color: #94a3b8; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="env-badge">TEST-MILJØ</div>
+    <h1>⚙️ Admin – KS Tilskudd Tester</h1>
+    <p>Logg over kodeforbedringstiltak og endringer</p>
+  </div>
+</header>
+
+<main>
+  <div class="stats" id="stats"></div>
+  <div class="filter-rad" id="filterRad"></div>
+  <div id="innhold"></div>
+</main>
+
+<footer>
+  KS Tilskudd · tester-KSTilskudd-TEST ·
+  <a href="rapport.html">♿ UU-rapport</a> ·
+  <a href="arkiv.html">📅 Arkiv</a> ·
+  <a href="testdata-hub.html">🗂️ Testdatahub</a>
+</footer>
+
+<script>
+const TYPE_META = {
+  'refaktorering':      { etikett: 'Refaktorering',      ikon: '🔧', orden: 1 },
+  'ny-funksjonalitet':  { etikett: 'Ny funksjonalitet',  ikon: '✨', orden: 2 },
+  'dokumentasjon':      { etikett: 'Dokumentasjon',      ikon: '📄', orden: 3 },
+  'automatisering':     { etikett: 'Automatisering',     ikon: '⚙️', orden: 4 },
+  'bugfix':             { etikett: 'Bugfix',              ikon: '🐛', orden: 5 },
+};
+
+const STATUS_ETIKETT = {
+  'ferdig':   'Ferdig',
+  'pågår':    'Pågår',
+  'planlagt': 'Planlagt',
+};
+
+let alleData = [];
+let aktivFilter = 'alle';
+
+function formaterDato(iso) {
+  const [år, mnd, dag] = iso.split('-');
+  return `${dag}.${mnd}.${år}`;
+}
+
+function byggStats(data) {
+  const totalt = data.length;
+  const ferdig = data.filter(d => d.status === 'ferdig').length;
+  const typer  = new Set(data.map(d => d.type)).size;
+
+  document.getElementById('stats').innerHTML = `
+    <div class="stat-kort">
+      <div class="tall">${totalt}</div>
+      <div class="etikett">Totalt</div>
+    </div>
+    <div class="stat-kort">
+      <div class="tall" style="color:#166534">${ferdig}</div>
+      <div class="etikett">Ferdigstilte</div>
+    </div>
+    <div class="stat-kort">
+      <div class="tall" style="color:#92400e">${totalt - ferdig}</div>
+      <div class="etikett">Under arbeid / planlagt</div>
+    </div>
+    <div class="stat-kort">
+      <div class="tall">${typer}</div>
+      <div class="etikett">Kategorier</div>
+    </div>
+  `;
+}
+
+function byggFilter(data) {
+  const typer = [...new Set(data.map(d => d.type))];
+  const rad = document.getElementById('filterRad');
+
+  const knapper = [{ verdi: 'alle', etikett: 'Alle' },
+    ...typer.sort((a, b) => (TYPE_META[a]?.orden ?? 9) - (TYPE_META[b]?.orden ?? 9))
+             .map(t => ({ verdi: t, etikett: `${TYPE_META[t]?.ikon ?? ''} ${TYPE_META[t]?.etikett ?? t}` }))
+  ];
+
+  rad.innerHTML = knapper.map(k => `
+    <button class="filter-knapp ${aktivFilter === k.verdi ? 'aktiv' : ''}"
+            onclick="settFilter('${k.verdi}')">${k.etikett}</button>
+  `).join('');
+}
+
+function byggInnhold(data) {
+  const filtrert = aktivFilter === 'alle' ? data : data.filter(d => d.type === aktivFilter);
+
+  if (filtrert.length === 0) {
+    document.getElementById('innhold').innerHTML = '<div class="tom">Ingen tiltak i denne kategorien.</div>';
+    return;
+  }
+
+  // Grupper etter type, sortert etter orden
+  const grupper = {};
+  filtrert.forEach(item => {
+    if (!grupper[item.type]) grupper[item.type] = [];
+    grupper[item.type].push(item);
+  });
+
+  const sorterte = Object.entries(grupper)
+    .sort(([a], [b]) => (TYPE_META[a]?.orden ?? 9) - (TYPE_META[b]?.orden ?? 9));
+
+  document.getElementById('innhold').innerHTML = sorterte.map(([type, items]) => {
+    const meta = TYPE_META[type] ?? { etikett: type, ikon: '•' };
+    return `
+      <div class="gruppe">
+        <div class="gruppe-tittel">
+          ${meta.ikon} ${meta.etikett}
+          <span class="gruppe-teller">${items.length}</span>
+        </div>
+        <div class="kort-liste">
+          ${items.map(item => `
+            <div class="kort type-${item.type}">
+              <div class="kort-dato">${formaterDato(item.dato)}</div>
+              <div>
+                <div class="kort-tittel">${item.tittel}</div>
+                <div class="kort-besk">${item.beskrivelse}</div>
+                ${item.filer?.length ? `<div class="kort-filer">${item.filer.map(f => `<span class="fil-tag">${f}</span>`).join('')}</div>` : ''}
+              </div>
+              <div>
+                <span class="status-badge status-${item.status}">${STATUS_ETIKETT[item.status] ?? item.status}</span>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function settFilter(verdi) {
+  aktivFilter = verdi;
+  byggFilter(alleData);
+  byggInnhold(alleData);
+}
+
+async function init() {
+  try {
+    const res = await fetch('admin-data.json');
+    alleData = await res.json();
+    // Sorter nyeste først
+    alleData.sort((a, b) => b.dato.localeCompare(a.dato));
+    byggStats(alleData);
+    byggFilter(alleData);
+    byggInnhold(alleData);
+  } catch (e) {
+    document.getElementById('innhold').innerHTML =
+      '<div class="tom">Kunne ikke laste admin-data.json.</div>';
+  }
+}
+
+init();
+</script>
+</body>
+</html>

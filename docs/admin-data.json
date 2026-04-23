@@ -1,0 +1,82 @@
+[
+  {
+    "dato": "2026-04-23",
+    "type": "refaktorering",
+    "tittel": "Opprett config.js – samle URL, timeouts og grenser",
+    "beskrivelse": "Alle hardkodede verdier (START_URL, VIEWPORT, SIDE_TIMEOUT, IDLE_TIMEOUT, LAST_TIMEOUT, HTTP_TIMEOUT, LINK_TIMEOUT, MAX_SIDER, ITERASJONER, KRASJ_ORD) samlet i én konfigurasjonsfil. Alle fem testfiler importerer nå fra config.js.",
+    "filer": ["config.js", "uu-tester.js", "monkey-tester.js", "sikkerhet-tester.js", "negativ-tester.js", "ytelse-tester.js"],
+    "status": "ferdig"
+  },
+  {
+    "dato": "2026-04-23",
+    "type": "dokumentasjon",
+    "tittel": "Opprett README.md med Quick Start og systemkrav",
+    "beskrivelse": "Ny README.md med systemkrav (Node.js v18+, macOS), steg-for-steg Quick Start, oversikt over alle npm-scripts, testdata-seksjon, forklaring av launchd-automatisering og feilsøkingsguide for de vanligste problemene.",
+    "filer": ["README.md"],
+    "status": "ferdig"
+  },
+  {
+    "dato": "2026-04-23",
+    "type": "ny-funksjonalitet",
+    "tittel": "Testdatahub – 40 testordninger på GitHub Pages",
+    "beskrivelse": "Ny side (testdata-hub.html) med 40 testordninger for tilskudd.fiks.test.ks.no: 10 hentet fra Datasett - tilskudd.xlsx (merket med gult badge) og 30 deterministisk genererte (blått badge). Inkluderer kilde-filter, status/region/kategori-filter, ekspanderbare detaljer, kopier JSON og eksporter alle.",
+    "filer": ["docs/testdata-hub.html", "docs/favicon-testdata.svg", "testdata/generer-testdata.js", "testdata/tilskudd-testdata.json"],
+    "status": "ferdig"
+  },
+  {
+    "dato": "2026-04-23",
+    "type": "ny-funksjonalitet",
+    "tittel": "Favicon for Testdatahub (lilla H)",
+    "beskrivelse": "SVG-favicon med lilla bakgrunn (#7c3aed) og hvit H lagt til i testdata-hub.html.",
+    "filer": ["docs/favicon-testdata.svg", "docs/testdata-hub.html"],
+    "status": "ferdig"
+  },
+  {
+    "dato": "2026-04-22",
+    "type": "automatisering",
+    "tittel": "Miljøvalideringsskript og pre-commit hook",
+    "beskrivelse": "valider-miljø.sh sjekker at testfilene peker på riktig miljø (TEST vs PROD) og blokkerer krysskontaminering. Pre-commit hook i .githooks/ kjører valideringen automatisk før hver commit.",
+    "filer": ["valider-miljø.sh", ".githooks/pre-commit"],
+    "status": "ferdig"
+  },
+  {
+    "dato": "2026-04-22",
+    "type": "automatisering",
+    "tittel": "Launchd-vakt: kjør tester selv om Mac var avslått",
+    "beskrivelse": "Ny launchd-jobb (no.ks.uu-tester-vakt.plist) kjører sjekk-og-kjoer.sh hvert 30. minutt. Skriptet er idempotent: avbryter stille hvis alle fire resultatfiler allerede finnes for dagen, og starter run-rapport-lokalt.sh ellers.",
+    "filer": ["sjekk-og-kjoer.sh"],
+    "status": "ferdig"
+  },
+  {
+    "dato": "2026-04-22",
+    "type": "ny-funksjonalitet",
+    "tittel": "Negativ testrapport",
+    "beskrivelse": "Ny testtype som tester edge cases: ugyldig input i skjemaer, URL-manipulering, grenseverdier, tilgangssjekker uten innlogging og nettleseratferd (smal mobilvisning, 4K, reload, back/forward).",
+    "filer": ["negativ-tester.js", "docs/negativ-rapport.html"],
+    "status": "ferdig"
+  },
+  {
+    "dato": "2026-04-22",
+    "type": "ny-funksjonalitet",
+    "tittel": "Sikkerhetsrapport",
+    "beskrivelse": "Ny testtype som sjekker HTTP-sikkerhetshoder (HSTS, CSP, X-Frame-Options m.fl.), eksponerte sensitive stier (.env, .git, Swagger), cookie-flagg (Secure, HttpOnly, SameSite) og CORS-konfigurasjon.",
+    "filer": ["sikkerhet-tester.js", "docs/sikkerhet-rapport.html"],
+    "status": "ferdig"
+  },
+  {
+    "dato": "2026-04-22",
+    "type": "bugfix",
+    "tittel": "HTML-escaping av ekstern tekst i rapporter",
+    "beskrivelse": "Uescaped tekst fra axe-core (f.eks. &lt;title&gt;-elementer) brøt HTML-parsingen og skjulte seksjoner i UU-rapporten. Alle eksterne strenger escapes nå konsekvent før de settes inn i rapport-HTML.",
+    "filer": ["uu-tester.js"],
+    "status": "ferdig"
+  },
+  {
+    "dato": "2026-04-14",
+    "type": "ny-funksjonalitet",
+    "tittel": "Arkivside med historikk per testtype",
+    "beskrivelse": "arkiv.html viser historikk for alle testtyper med score-tidslinje, filtreringsmuligheter og lenker til enkeltrapporter. generer-arkiv.js kopierer rapporter til docs/arkiv/ og regenererer siden.",
+    "filer": ["generer-arkiv.js", "docs/arkiv.html"],
+    "status": "ferdig"
+  }
+]
