@@ -11,6 +11,7 @@
     "ytelse": "node ytelse-tester.js",
     "arkiv": "node generer-arkiv.js",
     "testdata": "node testdata/generer-testdata.js",
+    "generer-soeknadsnumre": "node testdata/generer-soeknadsnumre.js",
     "valider": "bash valider-miljø.sh",
     "prepare": "git config core.hooksPath .githooks",
     "poc-uu": "playwright test --config poc.playwright.config.js && node generer-poc-uu-rapport.js"

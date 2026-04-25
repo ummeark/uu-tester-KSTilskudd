@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="favicon-testdata.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <title>Testdatagenerator – KS Tilskudd</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f4f2ee;
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: #0a1355;
+      color: #fff;
+      padding: 1.4rem 2rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+    .header-logo { font-size: 1.6rem; line-height: 1; }
+    .header-text h1 { font-size: 1.25rem; font-weight: 700; letter-spacing: -.01em; }
+    .header-text p  { font-size: .82rem; opacity: .78; margin-top: .15rem; }
+    .badge-test {
+      margin-left: auto;
+      background: #e9b308;
+      color: #1a1a1a;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      padding: .25rem .65rem;
+      border-radius: 2rem;
+      white-space: nowrap;
+    }
+
+    /* ── Main layout ── */
+    .main {
+      max-width: 1280px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: #fff;
+      border-radius: .75rem;
+      border: 1px solid #e2e0dc;
+      overflow: hidden;
+    }
+    .card-header {
+      background: #0a1355;
+      color: #fff;
+      padding: .75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      font-weight: 600;
+      font-size: .9rem;
+    }
+    .card-header .tag {
+      margin-left: auto;
+      background: rgba(255,255,255,.15);
+      font-size: .72rem;
+      padding: .2rem .55rem;
+      border-radius: 1rem;
+      font-weight: 500;
+    }
+    .card-body { padding: 1.25rem; }
+
+    /* ── Prompt box ── */
+    .prompt-box {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: .82rem;
+      line-height: 1.65;
+      background: #f8f7f5;
+      border: 1px solid #e2e0dc;
+      border-radius: .5rem;
+      padding: 1rem 1.1rem;
+      white-space: pre-wrap;
+      color: #1a1a1a;
+    }
+    .prompt-highlight { color: #0a1355; font-weight: 600; }
+    .prompt-comment   { color: #888; }
+
+    /* ── Kjør-knapp ── */
+    .btn-run {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      width: 100%;
+      margin-top: 1rem;
+      padding: .75rem 1.5rem;
+      background: #0a1355;
+      color: #fff;
+      border: none;
+      border-radius: .5rem;
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .btn-run:hover:not(:disabled) { background: #0c1a6e; }
+    .btn-run:disabled { opacity: .5; cursor: not-allowed; }
+
+    /* ── Output area ── */
+    .output-area {
+      min-height: 340px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .placeholder {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .75rem;
+      color: #999;
+      font-size: .88rem;
+      padding: 2rem;
+      text-align: center;
+    }
+    .placeholder-icon { font-size: 2.5rem; }
+
+    /* ── Cursor blinking ── */
+    .cursor-line {
+      display: none;
+      align-items: center;
+      gap: .5rem;
+      padding: .5rem 0;
+      color: #555;
+      font-size: .85rem;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .cursor-line.synlig { display: flex; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .cursor { display:inline-block; width:8px; height:16px; background:#0a1355; animation: blink 1s step-start infinite; border-radius:1px; }
+
+    /* ── Resultat-tabell ── */
+    .resultat { display: none; }
+    .resultat.synlig { display: block; }
+
+    .tabell-wrapper {
+      overflow-x: auto;
+      border-radius: .5rem;
+      border: 1px solid #e2e0dc;
+      margin-bottom: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .83rem;
+    }
+    thead th {
+      background: #0a1355;
+      color: #fff;
+      padding: .6rem .85rem;
+      text-align: left;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    tbody tr {
+      border-bottom: 1px solid #f0ede9;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .25s ease, transform .25s ease;
+    }
+    tbody tr.synlig {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    tbody tr:nth-child(even) { background: #f8f7f5; }
+    tbody td { padding: .55rem .85rem; vertical-align: middle; }
+    .kode {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem;
+      background: #eef0f8;
+      color: #0a1355;
+      padding: .15rem .4rem;
+      border-radius: .3rem;
+      white-space: nowrap;
+    }
+    .type-badge {
+      display: inline-block;
+      font-size: .7rem;
+      padding: .2rem .5rem;
+      border-radius: 1rem;
+      font-weight: 600;
+    }
+    .type-stat   { background: #dbeafe; color: #1e40af; }
+    .type-fylke  { background: #d1fae5; color: #065f46; }
+    .type-kommune { background: #fef3c7; color: #92400e; }
+
+    /* ── Ferdig-melding ── */
+    .ferdig-melding {
+      display: none;
+      align-items: center;
+      gap: .5rem;
+      padding: .65rem .9rem;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: .5rem;
+      font-size: .85rem;
+      color: #166534;
+      font-weight: 500;
+    }
+    .ferdig-melding.synlig { display: flex; }
+
+    /* ── Last ned-knapp ── */
+    .btn-last-ned {
+      display: none;
+      align-items: center;
+      gap: .5rem;
+      padding: .5rem 1rem;
+      background: #fff;
+      color: #0a1355;
+      border: 1.5px solid #0a1355;
+      border-radius: .4rem;
+      font-size: .82rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: .75rem;
+      width: fit-content;
+      transition: background .15s;
+    }
+    .btn-last-ned:hover { background: #eef0f8; }
+    .btn-last-ned.synlig { display: flex; }
+
+    /* ── Om-boks ── */
+    .om-boks {
+      grid-column: 1 / -1;
+      background: #eef0f8;
+      border: 1px solid #c7cde8;
+      border-radius: .75rem;
+      padding: 1rem 1.5rem;
+      font-size: .83rem;
+      color: #333;
+      line-height: 1.6;
+    }
+    .om-boks strong { color: #0a1355; }
+
+    /* ── Footer nav ── */
+    .footer-nav {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: .82rem;
+    }
+    .footer-nav a {
+      color: #0a1355;
+      text-decoration: none;
+      padding: .4rem .8rem;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: .4rem;
+      transition: background .12s;
+    }
+    .footer-nav a:hover { background: #eef0f8; }
+
+    @media (max-width: 760px) {
+      .main { grid-template-columns: 1fr; }
+      .om-boks, .footer-nav { grid-column: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-logo">🤖</div>
+  <div class="header-text">
+    <h1>Testdatagenerator</h1>
+    <p>Domenespesifikke testdata generert med Claude AI – KS Tilskudd</p>
+  </div>
+  <span class="badge-test">TEST-MILJØ</span>
+</header>
+
+<main class="main">
+
+  <!-- ── Venstre: Prompt ── -->
+  <div class="card">
+    <div class="card-header">
+      💬 Prompt til Claude
+      <span class="tag">claude-sonnet-4-6</span>
+    </div>
+    <div class="card-body">
+      <div class="prompt-box"><span class="prompt-comment">// Domenespesifikke testdata – søknadsnumre</span>
+
+<span class="prompt-highlight">Generer et sett med syntetiske søknadsnumre
+for en norsk tilskuddsforvaltningstjeneste.</span>
+
+<span class="prompt-highlight">Format:</span> [FORVALTER]-[ORDNINGSKODE]-[ÅR]-[LØPENUMMER]
+
+<span class="prompt-highlight">Krav:</span>
+- Forvalter: 3–4 bokstaver (departement/direktorat),
+  eller 2 siffer (fylkeskommune),
+  eller 4 siffer (kommune)
+- Ordningskode: 8 bokstaver (forkortelse av ordningens
+  navn), lesbar og meningsfull for saksbehandlere
+- År: 4 siffer (2020–2030)
+- Løpenummer: 6–8 siffer, start på 100001
+
+<span class="prompt-highlight">Lag 10 eksempler med variasjon i:</span>
+- ulike forvaltere (stat, fylke, kommune)
+- ulike ordningstyper
+- ulike år
+
+Returner som tabell med kolonnene:
+<span class="prompt-highlight">forvalter | ordningsnavn | ordningskode | år | søknadsnummer</span></div>
+
+      <button class="btn-run" id="btn-run" onclick="kjorDemo()">
+        ▶ Kjør demo
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Høyre: Output ── -->
+  <div class="card">
+    <div class="card-header">
+      📋 Generert output
+      <span class="tag" id="status-tag">Venter</span>
+    </div>
+    <div class="card-body output-area">
+
+      <div class="placeholder" id="placeholder">
+        <div class="placeholder-icon">⬅️</div>
+        <div>Klikk <strong>Kjør demo</strong> for å se Claude generere domenespesifikke testdata</div>
+      </div>
+
+      <div class="cursor-line" id="cursor-line">
+        <span class="cursor"></span>
+        <span>Claude genererer testdata …</span>
+      </div>
+
+      <div class="resultat" id="resultat">
+        <div class="tabell-wrapper">
+          <table id="tabell">
+            <thead>
+              <tr>
+                <th>Forvalter</th>
+                <th>Ordningsnavn</th>
+                <th>Ordningskode</th>
+                <th>År</th>
+                <th>Søknadsnummer</th>
+              </tr>
+            </thead>
+            <tbody id="tabell-body"></tbody>
+          </table>
+        </div>
+        <div class="ferdig-melding" id="ferdig-melding">
+          ✅ Ferdig! Dataene kan kopieres rett inn i testmiljøet.
+        </div>
+        <button class="btn-last-ned" id="btn-last-ned" onclick="lastNed()">
+          ⬇ Last ned CSV
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Om-boks ── -->
+  <div class="om-boks">
+    <strong>Hvorfor generere domenespesifikke testdata med KI?</strong>
+    Tenor testdatabasen dekker person- og organisasjonsdata, men ikke tilskuddsdomenet.
+    Felter som <em>søknadsnummer</em>, <em>tilskuddsordninger</em>, <em>kontonumre</em> og <em>beløpsstrukturer</em>
+    må teamet generere selv. Claude kan produsere realistiske, konsistente og varierte data
+    basert på mønsterkrav – langt raskere og mer presist enn manuell opprettelse.
+    <br><br>
+    <strong>Husk:</strong> En person i teamet skal alltid kvalitetssikre de genererte dataene før bruk.
+  </div>
+
+  <!-- ── Navigasjon ── -->
+  <nav class="footer-nav">
+    <a href="testdata-hub.html">🗂️ Testdatahub</a>
+    <a href="rapport.html">📊 UU-rapport</a>
+    <a href="arkiv.html">📅 Arkiv</a>
+    <a href="admin.html">⚙️ Admin</a>
+  </nav>
+
+</main>
+
+<script>
+const RADER = [
+  { forvalter:'KUD',  ordningsnavn:'Kulturminnevern',         kode:'KULTMINE', år:2024, nr:'KUD-KULTMINE-2024-100001',  type:'stat' },
+  { forvalter:'46',   ordningsnavn:'BIO-midlar Vestland',      kode:'BIOMIDVL', år:2026, nr:'46-BIOMIDVL-2026-100002',   type:'fylke' },
+  { forvalter:'NFR',  ordningsnavn:'Nanoteknologi forskning',  kode:'NANOFORS', år:2025, nr:'NFR-NANOFORS-2025-100003',  type:'stat' },
+  { forvalter:'32',   ordningsnavn:'Forskning i bedrift',      kode:'FORINNBE', år:2026, nr:'32-FORINNBE-2026-100004',   type:'fylke' },
+  { forvalter:'1505', ordningsnavn:'Kommunalt næringsfond',    kode:'KOMMNAER', år:2026, nr:'1505-KOMMNAER-2026-100005', type:'kommune' },
+  { forvalter:'NFD',  ordningsnavn:'Havbruk 2030',             kode:'HAVBR030', år:2024, nr:'NFD-HAVBR030-2024-100006',  type:'stat' },
+  { forvalter:'15',   ordningsnavn:'Regional innovasjon',      kode:'REGINOVA', år:2025, nr:'15-REGINOVA-2025-100007',   type:'fylke' },
+  { forvalter:'KDD',  ordningsnavn:'Boligutvikling distrikt',  kode:'BOLIGUDK', år:2023, nr:'KDD-BOLIGUDK-2023-100008',  type:'stat' },
+  { forvalter:'5001', ordningsnavn:'Næringsfond Trondheim',    kode:'NAERFOND', år:2026, nr:'5001-NAERFOND-2026-100009', type:'kommune' },
+  { forvalter:'LMD',  ordningsnavn:'Landbruk klimatiltak',     kode:'LANDBKLI', år:2025, nr:'LMD-LANDBKLI-2025-100010', type:'stat' },
+];
+
+const typeLabel = { stat: 'Stat', fylke: 'Fylke', kommune: 'Kommune' };
+
+function kjorDemo() {
+  const btn = document.getElementById('btn-run');
+  btn.disabled = true;
+  btn.textContent = '⏳ Genererer …';
+  document.getElementById('placeholder').style.display   = 'none';
+  document.getElementById('resultat').classList.remove('synlig');
+  document.getElementById('ferdig-melding').classList.remove('synlig');
+  document.getElementById('btn-last-ned').classList.remove('synlig');
+  document.getElementById('status-tag').textContent = 'Genererer …';
+  document.getElementById('cursor-line').classList.add('synlig');
+
+  const tbody = document.getElementById('tabell-body');
+  tbody.innerHTML = '';
+  RADER.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><span class="type-badge type-${r.type}">${typeLabel[r.type]}</span> ${r.forvalter}</td>
+      <td>${r.ordningsnavn}</td>
+      <td><span class="kode">${r.kode}</span></td>
+      <td>${r.år}</td>
+      <td><span class="kode">${r.nr}</span></td>`;
+    tbody.appendChild(tr);
+  });
+
+  // Vis rader én etter én
+  const rader = tbody.querySelectorAll('tr');
+  const DELAY_START = 900;
+  const DELAY_PER_ROW = 280;
+
+  rader.forEach((tr, i) => {
+    setTimeout(() => tr.classList.add('synlig'), DELAY_START + i * DELAY_PER_ROW);
+  });
+
+  const totalTid = DELAY_START + rader.length * DELAY_PER_ROW + 300;
+
+  setTimeout(() => {
+    document.getElementById('cursor-line').classList.remove('synlig');
+    document.getElementById('resultat').classList.add('synlig');
+    document.getElementById('status-tag').textContent = 'Ferdig';
+  }, DELAY_START - 100);
+
+  setTimeout(() => {
+    document.getElementById('ferdig-melding').classList.add('synlig');
+    document.getElementById('btn-last-ned').classList.add('synlig');
+    btn.disabled = false;
+    btn.textContent = '↺ Kjør igjen';
+  }, totalTid);
+}
+
+function lastNed() {
+  const header = ['Forvalter', 'Ordningsnavn', 'Ordningskode', 'År', 'Søknadsnummer'];
+  const linjer = RADER.map(r => [r.forvalter, r.ordningsnavn, r.kode, r.år, r.nr].join(';'));
+  const csv = [header.join(';'), ...linjer].join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'soeknadsnumre-testdata.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+</script>
+</body>
+</html>
