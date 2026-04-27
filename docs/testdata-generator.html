@@ -272,9 +272,34 @@
     }
     .footer-nav a:hover { background: #eef0f8; }
 
+    /* ── Kombinert seksjon ── */
+    .kombinert-kort {
+      grid-column: 1 / -1;
+    }
+    .kilde-legend {
+      display: flex;
+      gap: 1rem;
+      font-size: .78rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+    .kilde-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .25rem .65rem;
+      border-radius: 1rem;
+      font-weight: 600;
+      font-size: .72rem;
+    }
+    .kilde-tenor   { background: #dbeafe; color: #1e40af; }
+    .kilde-gen     { background: #d1fae5; color: #065f46; }
+    thead th .kilde-pill { font-size: .65rem; padding: .15rem .45rem; }
+    .beløp { font-variant-numeric: tabular-nums; }
+
     @media (max-width: 760px) {
       .main { grid-template-columns: 1fr; }
-      .om-boks, .footer-nav { grid-column: 1; }
+      .om-boks, .footer-nav, .kombinert-kort { grid-column: 1; }
     }
   </style>
 </head>
@@ -369,6 +394,61 @@ Returner som tabell med kolonnene:
             ⬇ Last ned CSV
           </button>
           <button class="btn-last-ned" id="btn-last-ned-json" onclick="lastNedJson()">
+            ⬇ Last ned JSON
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Kombinert: Tenor + generert ── -->
+  <div class="card kombinert-kort">
+    <div class="card-header">
+      🔀 Kombinert – Tenor testdata + generert domenedata
+      <span class="tag">søknader med reelle felter</span>
+    </div>
+    <div class="card-body">
+
+      <div class="kilde-legend">
+        <span class="kilde-pill kilde-tenor">● Tenor</span> Organisasjonsnavn, org.nr., kommune, næring – hentet fra Tenor testdatabase
+        <span class="kilde-pill kilde-gen" style="margin-left:.5rem">● Generert</span> Tilskuddsordning, søknadsnummer, beløp – generert etter domenemønster
+      </div>
+
+      <button class="btn-run" id="btn-run-komb" onclick="kjorDemoKomb()" style="margin-bottom:1rem">
+        ▶ Kjør demo
+      </button>
+
+      <div class="cursor-line" id="cursor-line-komb">
+        <span class="cursor"></span>
+        <span>Claude genererer kombinert testdata …</span>
+      </div>
+
+      <div class="resultat" id="resultat-komb">
+        <div class="tabell-wrapper">
+          <table id="tabell-komb">
+            <thead>
+              <tr>
+                <th>Søker <span class="kilde-pill kilde-tenor">Tenor</span></th>
+                <th>Org.nr. <span class="kilde-pill kilde-tenor">Tenor</span></th>
+                <th>Kommune <span class="kilde-pill kilde-tenor">Tenor</span></th>
+                <th>Næring <span class="kilde-pill kilde-tenor">Tenor</span></th>
+                <th>Tilskuddsordning <span class="kilde-pill kilde-gen">Generert</span></th>
+                <th>Søknadsnummer <span class="kilde-pill kilde-gen">Generert</span></th>
+                <th>Beløp <span class="kilde-pill kilde-gen">Generert</span></th>
+              </tr>
+            </thead>
+            <tbody id="tabell-komb-body"></tbody>
+          </table>
+        </div>
+        <div class="ferdig-melding" id="ferdig-melding-komb">
+          ✅ Ferdig! Dataene kan kopieres rett inn i testmiljøet.
+        </div>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
+          <button class="btn-last-ned" id="btn-last-ned-komb-csv" onclick="lastNedKombCsv()">
+            ⬇ Last ned CSV
+          </button>
+          <button class="btn-last-ned" id="btn-last-ned-komb-json" onclick="lastNedKombJson()">
             ⬇ Last ned JSON
           </button>
         </div>
@@ -518,6 +598,99 @@ function nedlast(blob, filnavn) {
   a.download = filnavn;
   a.click();
   URL.revokeObjectURL(a.href);
+}
+
+// ── Kombinert: Tenor + generert ────────────────────────────────────────────
+const KOMBINERT_POOL = [
+  { søkerNavn:'ORDENTLIG FLAT OTER',   orgnr:'314006690', kommune:'Hardanger',   næring:'Hotellvirksomhet',              ordningsnavn:'Kommunalt næringsfond Hardanger', kode:'KOMMNAER', forvalter:'46',   år:2026, nr:'46-KOMMNAER-2026-100001',   beløp:250000 },
+  { søkerNavn:'OPTIMISTISK SEIN OTER', orgnr:'314087992', kommune:'Sognefjorden', næring:'Akvakultur',                   ordningsnavn:'BIO-midlar Vestland',             kode:'BIOMIDVL', forvalter:'46',   år:2026, nr:'46-BIOMIDVL-2026-100002',   beløp:175000 },
+  { søkerNavn:'RAFFINERT PRAKTISK OTER',orgnr:'313680568',kommune:'Trondheim',    næring:'FoU innen naturvitenskap',      ordningsnavn:'Næringsfond Trondheim',           kode:'NAERFOND', forvalter:'5001', år:2026, nr:'5001-NAERFOND-2026-100003', beløp:500000 },
+  { søkerNavn:'ORIGINAL MODERAT OTER', orgnr:'310837482', kommune:'Alta',         næring:'Produksjon av elektrisitet',   ordningsnavn:'Energiomstilling RFylke',         kode:'ENERGOMR', forvalter:'11',   år:2025, nr:'11-ENERGOMR-2025-100004',   beløp:750000 },
+  { søkerNavn:'EMPIRISK OPPBLÅST OTER',orgnr:'310940240', kommune:'Kristiansand', næring:'IT-tjenester',                 ordningsnavn:'Kompetanseløft Agder',            kode:'KOMPLAGD', forvalter:'42',   år:2025, nr:'42-KOMPLAGD-2025-100005',   beløp:320000 },
+  { søkerNavn:'ENERGISK RASK OTER',    orgnr:'315112233', kommune:'Bergen',        næring:'Restaurantvirksomhet',         ordningsnavn:'Klimafond Bergen',                kode:'KLIMFBER', forvalter:'4601', år:2024, nr:'4601-KLIMFBER-2024-100006', beløp:180000 },
+  { søkerNavn:'KREATIV STERK OTER',    orgnr:'316223344', kommune:'Stavanger',     næring:'Maritim industri',             ordningsnavn:'Havneutvikling Stavanger',        kode:'HAVNUTST', forvalter:'1103', år:2025, nr:'1103-HAVNUTST-2025-100007', beløp:600000 },
+  { søkerNavn:'SMART LITEN OTER',      orgnr:'317334455', kommune:'Tromsø',        næring:'Fiskeri og havbruk',           ordningsnavn:'Næringsutvikling Tromsø',         kode:'NAERTROM', forvalter:'5501', år:2024, nr:'5501-NAERTROM-2024-100008', beløp:290000 },
+  { søkerNavn:'MODIG STOR OTER',       orgnr:'318445566', kommune:'Drammen',       næring:'Bygge- og anleggsvirksomhet',  ordningsnavn:'Stedsutvikling Drammen',          kode:'STEDSUDR', forvalter:'3005', år:2026, nr:'3005-STEDSUDR-2026-100009', beløp:400000 },
+  { søkerNavn:'FLITTIG GLAD OTER',     orgnr:'319556677', kommune:'Ålesund',       næring:'Fiskeri',                      ordningsnavn:'Fiskeri Ålesund',                 kode:'FISKALES', forvalter:'1507', år:2023, nr:'1507-FISKALES-2023-100010', beløp:150000 },
+  { søkerNavn:'STILLE RUND OTER',      orgnr:'320667788', kommune:'Oslo',           næring:'Informasjon og kommunikasjon', ordningsnavn:'Gründerhus Oslo',                kode:'GRUNDHUS', forvalter:'0301', år:2025, nr:'0301-GRUNDHUS-2025-100011', beløp:350000 },
+  { søkerNavn:'KJEKK MØRK OTER',       orgnr:'321778899', kommune:'Trondheim',     næring:'Forskning og utvikling',       ordningsnavn:'Nanoteknologi forskning',         kode:'NANOFORS', forvalter:'NFR',  år:2025, nr:'NFR-NANOFORS-2025-100012',  beløp:900000 },
+  { søkerNavn:'NØYAKTIG RETT OTER',    orgnr:'322889900', kommune:'Akershus',      næring:'Landbruk',                     ordningsnavn:'Landbruk klimatiltak',            kode:'LANDBKLI', forvalter:'LMD',  år:2025, nr:'LMD-LANDBKLI-2025-100013',  beløp:220000 },
+  { søkerNavn:'IVRIG VARM OTER',       orgnr:'323990011', kommune:'Kristiansund',  næring:'Handel',                       ordningsnavn:'Kommunalt næringsfond',           kode:'KOMMNAER', forvalter:'1505', år:2026, nr:'1505-KOMMNAER-2026-100014', beløp:275000 },
+  { søkerNavn:'FLINK KJØLIG OTER',     orgnr:'324001122', kommune:'Hamar',          næring:'Kulturell virksomhet',         ordningsnavn:'Kulturminnevern',                kode:'KULTMINE', forvalter:'KUD',  år:2024, nr:'KUD-KULTMINE-2024-100015',  beløp:125000 },
+  { søkerNavn:'MORSOM LYNG OTER',      orgnr:'325112233', kommune:'Ålesund',        næring:'Teknologi',                    ordningsnavn:'Regional innovasjon',             kode:'REGINOVA', forvalter:'15',   år:2025, nr:'15-REGINOVA-2025-100016',   beløp:450000 },
+  { søkerNavn:'AKTIV BLID OTER',       orgnr:'326223344', kommune:'Sandefjord',    næring:'Kultur og fritid',             ordningsnavn:'Kulturmidler Sandefjord',         kode:'KULTMSND', forvalter:'3807', år:2025, nr:'3807-KULTMSND-2025-100017', beløp:95000  },
+  { søkerNavn:'ROLIG HVIT OTER',       orgnr:'327334455', kommune:'Innlandet',     næring:'Reiseliv',                     ordningsnavn:'Reiselivsmidler Innlandet',       kode:'REISLIVM', forvalter:'54',   år:2026, nr:'54-REISLIVM-2026-100018',   beløp:380000 },
+  { søkerNavn:'SPREK GUL OTER',        orgnr:'328445566', kommune:'Nordland',      næring:'Ungdomsarbeid',                ordningsnavn:'Ungdomstiltak Nordland',          kode:'UNGDNORL', forvalter:'18',   år:2023, nr:'18-UNGDNORL-2023-100019',   beløp:70000  },
+  { søkerNavn:'TAPPER BLÅ OTER',       orgnr:'329556677', kommune:'Tromsø',        næring:'Havbruk',                      ordningsnavn:'Arktis 2030',                     kode:'ARKT2030', forvalter:'55',   år:2026, nr:'55-ARKT2030-2026-100020',   beløp:1200000},
+];
+
+let gjeldendeKomb = [];
+
+const kr = n => new Intl.NumberFormat('nb-NO').format(n) + ' kr';
+
+function kjorDemoKomb() {
+  gjeldendeKomb = [...KOMBINERT_POOL].sort(() => Math.random() - 0.5).slice(0, 8);
+
+  const btn = document.getElementById('btn-run-komb');
+  btn.disabled = true;
+  btn.textContent = '⏳ Genererer …';
+  document.getElementById('resultat-komb').classList.remove('synlig');
+  document.getElementById('ferdig-melding-komb').classList.remove('synlig');
+  document.getElementById('btn-last-ned-komb-csv').classList.remove('synlig');
+  document.getElementById('btn-last-ned-komb-json').classList.remove('synlig');
+  document.getElementById('cursor-line-komb').classList.add('synlig');
+
+  const tbody = document.getElementById('tabell-komb-body');
+  tbody.innerHTML = '';
+  gjeldendeKomb.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${r.søkerNavn}</td>
+      <td><span class="kode">${r.orgnr}</span></td>
+      <td>${r.kommune}</td>
+      <td>${r.næring}</td>
+      <td>${r.ordningsnavn}</td>
+      <td><span class="kode">${r.nr}</span></td>
+      <td class="beløp">${kr(r.beløp)}</td>`;
+    tbody.appendChild(tr);
+  });
+
+  const rader = tbody.querySelectorAll('tr');
+  const DELAY_START = 3000;
+  const DELAY_PER_ROW = 320;
+
+  rader.forEach((tr, i) => {
+    setTimeout(() => tr.classList.add('synlig'), DELAY_START + i * DELAY_PER_ROW);
+  });
+
+  const totalTid = DELAY_START + rader.length * DELAY_PER_ROW + 300;
+
+  setTimeout(() => {
+    document.getElementById('cursor-line-komb').classList.remove('synlig');
+    document.getElementById('resultat-komb').classList.add('synlig');
+  }, DELAY_START - 100);
+
+  setTimeout(() => {
+    document.getElementById('ferdig-melding-komb').classList.add('synlig');
+    document.getElementById('btn-last-ned-komb-csv').classList.add('synlig');
+    document.getElementById('btn-last-ned-komb-json').classList.add('synlig');
+    btn.disabled = false;
+    btn.textContent = '↺ Kjør igjen';
+  }, totalTid);
+}
+
+function lastNedKombCsv() {
+  const header = ['Søker', 'Org.nr.', 'Kommune', 'Næring', 'Tilskuddsordning', 'Søknadsnummer', 'Beløp'];
+  const linjer = gjeldendeKomb.map(r => [r.søkerNavn, r.orgnr, r.kommune, r.næring, r.ordningsnavn, r.nr, r.beløp].join(';'));
+  nedlast(new Blob([[header.join(';'), ...linjer].join('\n')], { type: 'text/csv;charset=utf-8' }), 'kombinert-testdata.csv');
+}
+
+function lastNedKombJson() {
+  const data = gjeldendeKomb.map(r => ({
+    tenor: { søkerNavn: r.søkerNavn, orgnr: r.orgnr, kommune: r.kommune, næring: r.næring },
+    generert: { ordningsnavn: r.ordningsnavn, ordningskode: r.kode, forvalter: r.forvalter, år: r.år, søknadsnummer: r.nr, beløp: r.beløp },
+  }));
+  nedlast(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }), 'kombinert-testdata.json');
 }
 </script>
 </body>
