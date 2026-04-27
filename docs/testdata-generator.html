@@ -364,9 +364,14 @@ Returner som tabell med kolonnene:
         <div class="ferdig-melding" id="ferdig-melding">
           ✅ Ferdig! Dataene kan kopieres rett inn i testmiljøet.
         </div>
-        <button class="btn-last-ned" id="btn-last-ned" onclick="lastNed()">
-          ⬇ Last ned CSV
-        </button>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
+          <button class="btn-last-ned" id="btn-last-ned" onclick="lastNedCsv()">
+            ⬇ Last ned CSV
+          </button>
+          <button class="btn-last-ned" id="btn-last-ned-json" onclick="lastNedJson()">
+            ⬇ Last ned JSON
+          </button>
+        </div>
       </div>
 
     </div>
@@ -446,6 +451,7 @@ function kjorDemo() {
   document.getElementById('resultat').classList.remove('synlig');
   document.getElementById('ferdig-melding').classList.remove('synlig');
   document.getElementById('btn-last-ned').classList.remove('synlig');
+  document.getElementById('btn-last-ned-json').classList.remove('synlig');
   document.getElementById('status-tag').textContent = 'Genererer …';
   document.getElementById('cursor-line').classList.add('synlig');
 
@@ -481,19 +487,35 @@ function kjorDemo() {
   setTimeout(() => {
     document.getElementById('ferdig-melding').classList.add('synlig');
     document.getElementById('btn-last-ned').classList.add('synlig');
+    document.getElementById('btn-last-ned-json').classList.add('synlig');
     btn.disabled = false;
     btn.textContent = '↺ Kjør igjen';
   }, totalTid);
 }
 
-function lastNed() {
+function lastNedCsv() {
   const header = ['Forvalter', 'Ordningsnavn', 'Ordningskode', 'År', 'Søknadsnummer'];
   const linjer = gjeldende.map(r => [r.forvalter, r.ordningsnavn, r.kode, r.år, r.nr].join(';'));
   const csv = [header.join(';'), ...linjer].join('\n');
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  nedlast(new Blob([csv], { type: 'text/csv;charset=utf-8' }), 'soeknadsnumre-testdata.csv');
+}
+
+function lastNedJson() {
+  const data = gjeldende.map(r => ({
+    forvalter: r.forvalter,
+    ordningsnavn: r.ordningsnavn,
+    ordningskode: r.kode,
+    år: r.år,
+    søknadsnummer: r.nr,
+    type: r.type,
+  }));
+  nedlast(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }), 'soeknadsnumre-testdata.json');
+}
+
+function nedlast(blob, filnavn) {
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'soeknadsnumre-testdata.csv';
+  a.download = filnavn;
   a.click();
   URL.revokeObjectURL(a.href);
 }
